@@ -624,7 +624,8 @@ Using Promises or Async/Await
 Ans: The JavaScript prototype property allows you to add new properties to object constructors:
 
 
-## 77.	 How to compare to date object in javascript – getTime
+## 77.	 How to compare to date object in javascript 
+Ans:  getTime
 
 
 ## 78.	 Local storage vs session storage
@@ -646,3 +647,10 @@ String
 Boolean
 Object
 Undefined 
+
+
+## 83.	Call, apply, bind
+
+a)	Call invokes the function and allows you to pass in arguments one by one.
+b)	Apply invokes the function and allows you to pass in arguments as an array.
+c)	Bind returns a new function, allowing you to pass in this array and any number of arguments.
