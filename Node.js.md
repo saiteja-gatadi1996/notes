@@ -6,3 +6,7 @@ What exactly is Node.js
 Browser vs Node.js
 
 ![image](https://user-images.githubusercontent.com/42731246/148641801-db97750f-66b2-4bbb-adbe-ba6358eb8693.png)
+
+
+### ES6 vs Common JS
+![image](https://user-images.githubusercontent.com/42731246/148687127-5454f1a2-3d19-4aed-a8d7-4023d4f905be.png)
