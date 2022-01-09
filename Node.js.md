@@ -9,4 +9,6 @@ Browser vs Node.js
 
 
 ### ES6 vs Common JS
-![image](https://user-images.githubusercontent.com/42731246/148687127-5454f1a2-3d19-4aed-a8d7-4023d4f905be.png)
+![image](https://user-images.githubusercontent.com/42731246/148687257-44f274f7-0a85-4e7c-b5c2-287773ddcb73.png)
+
+![image](https://user-images.githubusercontent.com/42731246/148687290-6e6a3104-455d-4277-8366-42bc8da2660e.png)
