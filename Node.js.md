@@ -18,8 +18,10 @@
 
 Ex:
 
+```js
 > const name = "john"
-> name (prints john)
+> name // john
+```
 
 ![image](https://user-images.githubusercontent.com/42731246/149760220-5d29aa58-2d08-4036-b13e-454a862ad96e.png)
 
@@ -98,3 +100,62 @@ writeFileSync would create the file if doesn't exist, initially there was no fil
 #### iv) FS Module (Async) Examples
 
 ![image](https://user-images.githubusercontent.com/42731246/149823297-788050e5-3594-494d-b221-32e1bd206502.png)
+
+similarly write the code for reading the second file inside the call back
+
+Ex:
+![image](https://user-images.githubusercontent.com/42731246/149918682-b9a02f95-ff01-4c77-91dc-343b9e6678e5.png)
+
+Now after reading both first and second, we are writing it to a new non-existing file like below
+
+![image](https://user-images.githubusercontent.com/42731246/149919033-a21e9674-1942-4fb9-b84a-dbfc26e69e1c.png)
+
+O/P:
+![image](https://user-images.githubusercontent.com/42731246/149918880-3ab2d173-00e3-45fa-a340-0be89aedfb13.png)
+
+##### --> Synchronous Programming:
+
+Code gets executed line by line, no matter how much it takes time
+
+Cons: Impacts the application when there are users hitting the app simultaneously
+
+![image](https://user-images.githubusercontent.com/42731246/149921078-041defc9-baf0-458c-a1e8-58c110310723.png)
+
+##### --> Asynchronous Programming:
+
+Code doesn't waits for anything, this gets executed based on the least response time.
+
+Ex:
+(done with the task) is actually inside the writeFile module which usually takes some time to perform the write operations and then complete it and then log this message to the console. Meanwhile Async prints the next task (starting next task) and then it looks for another logs (for us there is only one remaining) and finally prints the done with the task
+
+![image](https://user-images.githubusercontent.com/42731246/149922212-7444be7e-e08c-48c3-852e-0974665db017.png)
+
+#### v) HTTP Module
+
+![image](https://user-images.githubusercontent.com/42731246/149926011-a47b2741-534a-4145-ac5a-ffb69b278689.png)
+
+##### We will see this below one only if the server keeps running (After entering node app.js (in the terminal, we don't see the exit)
+
+![image](https://user-images.githubusercontent.com/42731246/149925952-66c853db-1832-47fe-834e-92268aa9d191.png)
+
+##### Playing with req object
+
+![image](https://user-images.githubusercontent.com/42731246/149927647-9f49966a-eb5b-4406-bc25-386f93a81284.png)
+
+If you provide /about in the request it will showcase the 8th line.
+
+Whereas if you try to provide something other it will be printing like below (there is not mandatory to provide error as a keyword, you can put anything that doesn't exist)
+
+![image](https://user-images.githubusercontent.com/42731246/149927807-378e0596-b233-45ad-80a2-796536dc54af.png)
+
+### 8. NPM (Node Package Manager)
+
+![image](https://user-images.githubusercontent.com/42731246/149929037-b1bedc4f-d671-4652-9ca0-7f04b88fa09b.png)
+
+![image](https://user-images.githubusercontent.com/42731246/149929305-73a14145-26dc-40a7-9a6f-00bb015e9501.png)
+
+
+##### Install package as a dev-dependency(this package is not required when our application is deployed into production, only using this package for development purpose and makes no sense in Production)
+
+![image](https://user-images.githubusercontent.com/42731246/149930692-ad46d0a3-ffc8-4beb-9971-daaa4c170796.png)
+
