@@ -159,3 +159,6 @@ Whereas if you try to provide something other it will be printing like below (th
 
 ![image](https://user-images.githubusercontent.com/42731246/149930692-ad46d0a3-ffc8-4beb-9971-daaa4c170796.png)
 
+
+##### Uninstall the npm package
+Ex: npm uninstall bootstrap
