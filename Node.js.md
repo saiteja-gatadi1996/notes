@@ -154,11 +154,157 @@ Whereas if you try to provide something other it will be printing like below (th
 
 ![image](https://user-images.githubusercontent.com/42731246/149929305-73a14145-26dc-40a7-9a6f-00bb015e9501.png)
 
-
 ##### Install package as a dev-dependency(this package is not required when our application is deployed into production, only using this package for development purpose and makes no sense in Production)
 
 ![image](https://user-images.githubusercontent.com/42731246/149930692-ad46d0a3-ffc8-4beb-9971-daaa4c170796.png)
 
-
 ##### Uninstall the npm package
+
 Ex: npm uninstall bootstrap
+
+### 9. Setup Promises (Avoiding Callback HELL!)
+
+![image](https://user-images.githubusercontent.com/42731246/149981621-aa9722a4-fefe-4ae6-8099-1e5202e867ad.png)
+
+##### Better way of writing instead of Call Back Hell is Async/Await
+
+![image](https://user-images.githubusercontent.com/42731246/149982289-d15206a8-044b-4e20-a956-618198ce11ca.png)
+
+O/P:
+![image](https://user-images.githubusercontent.com/42731246/149982443-5147d17e-c126-4c77-89cf-ac32ed18c844.png)
+
+##### Node's Native Option, much better than a wrapper function (getText())
+
+![image](https://user-images.githubusercontent.com/42731246/149983406-37f68832-2135-4614-a6c1-6de50d7370c3.png)
+
+O/P:
+![image](https://user-images.githubusercontent.com/42731246/149983251-1ae3a95e-87ce-4f82-9248-ff3ae1a31820.png)
+
+### 10. EVENTS
+
+#### i)
+
+![image](https://user-images.githubusercontent.com/42731246/149984420-bf7f38cf-14a1-4c95-ae94-413148e1327a.png)
+
+##### customEmitter is the instance created from the EventEmitter class
+
+##### response is the event name, and I need to match this naming with that on line 9th so that once it gets subscribed we can emit and log it on the terminal
+
+![image](https://user-images.githubusercontent.com/42731246/149984871-13630862-c867-4632-ad77-bb9051866c0a.png)
+
+#### Note: First Listen to the event then only emit it.
+
+#### ii) With HTTP
+
+![image](https://user-images.githubusercontent.com/42731246/149986306-309760c2-3533-419e-8161-50334c7a6855.png)
+
+##### Event: 'request' (as per documentation)
+
+### 11. STREAMS
+
+![image](https://user-images.githubusercontent.com/42731246/149986790-b16656bd-077a-4142-8d1a-3385482dd3ed.png)
+
+![image](https://user-images.githubusercontent.com/42731246/149988001-6ef17fd2-6b5d-4358-a395-f2d2d4fc2362.png)
+
+By default the size of the buffer is 64 Kilo Byte, however we can control it.
+
+The way to control the buffer size to pass the object, {highWaterMark}
+
+#### Sample Structure:
+
+![image](https://user-images.githubusercontent.com/42731246/149988144-3a50e9c7-1455-41ff-8c8a-2bd6dcbb6b32.png)
+
+#### Formatted Structure: Added few properties
+
+![image](https://user-images.githubusercontent.com/42731246/149988645-025dd075-921f-4bb4-9520-8f87330d3549.png)
+
+#### Handling error event (just provide the wrong path on line 3) --> no such file or directory
+
+![image](https://user-images.githubusercontent.com/42731246/149988762-a067d720-518c-4fc1-855b-3dc932996ac2.png)
+
+#### Live Example, you can see the data is being sent as chunks (Transfer-Encoding)
+
+![image](https://user-images.githubusercontent.com/42731246/149989821-0e571acd-f95f-4107-95ed-3c0a977a16c6.png)
+
+# Express.js
+
+##### we have pasted the styles.css, logo.svg, browser-app.js files and now we are using as a middleware for these file items(static assets) for which server usually don't change (app.use)
+
+![image](https://user-images.githubusercontent.com/42731246/150007135-3068426f-d29b-48b0-b2c3-ab14b22e7c33.png)
+
+#### In this below case, we have moved index.html to public folder (static assets)
+
+![image](https://user-images.githubusercontent.com/42731246/150008211-dded8f42-567d-40c1-b608-182fe14ae4ca.png)
+
+#### Basic Route Example
+
+![image](https://user-images.githubusercontent.com/42731246/150009500-6f2778a8-86f6-44b7-a6fb-27e880c3ccd8.png)
+
+#### To access the id from the params (url), make sure to specify : and then any name you like
+
+#### Sample Code Example:
+
+![image](https://user-images.githubusercontent.com/42731246/150009926-6692ec13-8041-468b-81c0-90067e4e9640.png)
+
+##### Here it is 1
+
+![image](https://user-images.githubusercontent.com/42731246/150010136-410755ea-df53-40b8-b2bd-92e0c86569c3.png)
+
+##### Formatted Code
+
+![image](https://user-images.githubusercontent.com/42731246/150010570-c4215663-e472-4d00-8609-777108fafb80.png)
+
+##### Now you can change the values of /1 to /4 in the browser and see the browser fetching the correct values
+
+##### Similary another Example route:
+
+```js
+app.get('/api/products/:productID/reviews/:reviewID', (req, res) => {
+  console.log(req.params);
+  res.send('hello world');
+});
+```
+
+![image](https://user-images.githubusercontent.com/42731246/150010820-8f34b25f-53f6-4a5e-941c-22a5ec7fd809.png)
+
+### 1. Query String
+
+![image](https://user-images.githubusercontent.com/42731246/150011689-8ad8e380-8339-4eec-b9d9-812dce6fa702.png)
+
+##### I can add as many fields as I can after mentioning as query
+
+![image](https://user-images.githubusercontent.com/42731246/150011641-9a0d7625-d480-4255-971f-9ab1a7f7cf41.png)
+
+![image](https://user-images.githubusercontent.com/42731246/150011855-e4ac07b8-90a2-4d51-9763-20662bced1eb.png)
+
+## Example
+
+```js
+app.get('/api/v1/query', (req, res) => {
+  // console.log(req.query)
+  const { search, limit } = req.query;
+  let sortedProducts = [...products];
+
+  if (search) {
+    sortedProducts = sortedProducts.filter((product) => {
+      return product.name.startsWith(search);
+    });
+  }
+  if (limit) {
+    sortedProducts = sortedProducts.slice(0, Number(limit));
+  }
+  if (sortedProducts.length < 1) {
+    // res.status(200).send('no products matched your search');
+    return res.status(200).json({ sucess: true, data: [] });
+  }
+  res.status(200).json(sortedProducts);
+});
+```
+
+![image](https://user-images.githubusercontent.com/42731246/150012961-627057f2-ebf8-4962-a47e-fbe76d990a8a.png)
+
+![image](https://user-images.githubusercontent.com/42731246/150013144-4f2a3378-4504-4c7b-bdef-f9975b038bb0.png)
+
+##### in case if the search results with empty then this is how we are showing
+
+![image](https://user-images.githubusercontent.com/42731246/150013446-abaa7f06-2206-439a-a944-dc9efef1ea2c.png)

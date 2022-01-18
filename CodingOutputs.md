@@ -149,3 +149,26 @@ Output
 ![alt text](https://user-images.githubusercontent.com/42731246/142737184-77289625-f001-4606-bf83-9068a3252ebe.png)
 
 ## 15.
+
+Javascript is by default a synchronous
+
+![image](https://user-images.githubusercontent.com/42731246/149968745-ec192ac9-2ba5-4ddf-8d0a-65d4f88d32b4.png)
+
+using Browser API's to offload the tasks
+![image](https://user-images.githubusercontent.com/42731246/149968037-2d87d91a-2666-4adf-a135-3873e833fb75.png)
+
+## 16. setInterval keeps on running until we kill the process
+
+![image](https://user-images.githubusercontent.com/42731246/149972934-d770c51d-22b3-4a49-85db-1b5db28a60a5.png)
+
+## 17. listen is asynchronous so it keeps on running,
+
+Every time you hit the request on the browser, you get that logged in as (request event)
+
+![image](https://user-images.githubusercontent.com/42731246/149973561-26003a5b-e3c6-43b6-9e2f-728459bc5bff.png)
+
+## 18.Blocking code in callbacks (async code),
+
+Cons: Not only /about page will take time to load, but this now affects other page routes also getting blocked (Home page route)
+
+![image](https://user-images.githubusercontent.com/42731246/149974975-7415bcff-3c8a-4887-9629-5e3b60c2e58f.png)
