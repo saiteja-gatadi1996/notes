@@ -181,7 +181,7 @@ console.log(a);
 var a=20;
 
 
-##20
+## 20
 
 var obj1={type:"Fiat", model:"500", color:"white"};
 var obj2 = obj1;
@@ -189,7 +189,7 @@ obj2.model= "600";
 console.log(obj1);
 console.log(obj2);
 
-##21
+## 21
 
 let a=10;
 let a=20;
