@@ -172,3 +172,24 @@ Every time you hit the request on the browser, you get that logged in as (reques
 Cons: Not only /about page will take time to load, but this now affects other page routes also getting blocked (Home page route)
 
 ![image](https://user-images.githubusercontent.com/42731246/149974975-7415bcff-3c8a-4887-9629-5e3b60c2e58f.png)
+
+## 19
+a=10;
+
+console.log(a);
+
+var a=20;
+
+
+##20
+
+var obj1={type:"Fiat", model:"500", color:"white"};
+var obj2 = obj1;
+obj2.model= "600";
+console.log(obj1);
+console.log(obj2);
+
+##21
+
+let a=10;
+let a=20;
