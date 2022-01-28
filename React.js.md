@@ -310,7 +310,11 @@ console.log(store.getState());
 ```
 
 b. State is read-only. The only way to change the state is to emit an action, an object describing what happened. ...
+
+The only way to change the state is to emit an action, an object describing what happened.
+
 c. Changes are made with pure functions.
+To specify how the state tree is transformed by actions, you write pure reducers.
 
 ### 32. Redux thunk middleware?
 
@@ -325,6 +329,14 @@ Ans: React support Uni Directional data binding. i.e(from Parent to child),
 ### 35. What is ref in react?
 
 Ans: Refs are a function provided by React to access the DOM element and the React element that you might have created on your own. They are used in cases where we want to change the value of a child component, without making use of props and all.
+
+### When to Use Refs
+
+There are a few good use cases for refs:
+
+Managing focus, text selection, or media playback.
+Triggering imperative animations.
+Integrating with third-party DOM libraries.
 
 ### 36. How to focus the filed when the component is loaded
 
