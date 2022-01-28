@@ -1,206 +1,426 @@
-1.	What is JSX?
+### 1. What is JSX?
 
 JSX stands for JavaScript XML. JSX allows us to write HTML in React. JSX makes it easier to write and add HTML in React.
 
-2.	
+### 2.
+
 ![image](https://user-images.githubusercontent.com/42731246/151151328-2a575f80-1e86-4f4a-b9ab-a6f9197e7344.png)
 
+### 3. What is SPA?
 
-3.	What is SPA?
+An SPA (Single-page application) is a web app implementation that loads only a single web document, and then updates the body content of that single document via JavaScript APIs such as XMLHttpRequest and Fetch when different content is to be shown.
 
-A single-page application does not require page reloading during use.
-SPAs are all about serving an outstanding UX by trying to imitate a “natural” environment in the browser — no page reloads, no extra wait time. It is just one web page that you visit which then loads all other content using JavaScript — which they heavily depend on
+This therefore allows users to use websites without loading whole new pages from the server, which can result in performance gains and a more dynamic experience, with some tradeoff disadvantages such as SEO, more effort required to maintain state, implement navigation, and do meaningful performance monitoring.
 
-4.	Render prop
+### 4. Render prop
 
 The term “render prop” refers to a technique for sharing code between React components using a prop whose value is a function.
 
-5.	ServiceWorker vs Web Worker?
+```js
+class Cat extends React.Component {
+  render() {
+    const mouse = this.props.mouse;
+    return (
+      <img
+        src='/cat.jpg'
+        style={{ position: 'absolute', left: mouse.x, top: mouse.y }}
+      />
+    );
+  }
+}
 
+class Mouse extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.state = { x: 0, y: 0 };
+  }
 
+  handleMouseMove(event) {
+    this.setState({
+      x: event.clientX,
+      y: event.clientY,
+    });
+  }
 
+  render() {
+    return (
+      <div style={{ height: '100vh' }} onMouseMove={this.handleMouseMove}>
+        {/*
+          Instead of providing a static representation of what <Mouse> renders,
+          use the `render` prop to dynamically determine what to render.
+        */}
+        {this.props.render(this.state)}
+      </div>
+    );
+  }
+}
 
+class MouseTracker extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Move the mouse around!</h1>
+        <Mouse render={(mouse) => <Cat mouse={mouse} />} />
+      </div>
+    );
+  }
+}
+```
 
-6.	Lazy Loading?
+### 5. ServiceWorker vs Web Worker?
+
+#### ServiceWorker:
+
+Rich offline experiences, periodic background syncs, push notifications. A service worker is a script that your browser runs in the background, separate from a web page, opening the door to features that don't need a web page or user interaction.The reason this is such an exciting API is that it allows you to support offline experiences, giving developers complete control over the experience.
+
+It's a JavaScript Worker, so it can't access the DOM directly. Instead, a service worker can communicate with the pages it controls by responding to messages sent via the postMessage interface, and those pages can manipulate the DOM if needed.
+
+#### Web Worker:
+
+Web Workers are a simple means for web content to run scripts in background threads. The worker thread can perform tasks without interfering with the user interface. In addition, they can perform I/O using XMLHttpRequest (although the responseXML and channel attributes are always null) or fetch (with no such restrictions). Once created, a worker can send messages to the JavaScript code that created it by posting messages to an event handler specified by that code (and vice versa).
+
+### 6. Lazy Loading/Code Splitting?
 
 It is a new function in react that lets you load react components lazily through code splitting without help from any additional libraries. Lazy loading is the technique of rendering only-needed or critical user interface items first, then quietly unrolling the non-critical items later.
 
 lazy(() => import('./OtherComponent')); This will automatically load the bundle containing the OtherComponent when this component is first rendered. React. lazy takes a function that must call a dynamic import() .
 
-7.	SEO in React?
+Code-splitting your app can help you “lazy-load” just the things that are currently needed by the user, which can dramatically improve the performance of your app. While you haven’t reduced the overall amount of code in your app, you’ve avoided loading code that the user may never need, and reduced the amount of code needed during the initial load.
+
+Before:
+
+```js
+import { add } from './math';
+
+console.log(add(16, 26));
+```
+
+After:
+
+```js
+import('./math').then((math) => {
+  console.log(math.add(16, 26));
+});
+```
+
+#### React.lazy
+
+Before:
+
+```js
+import OtherComponent from './OtherComponent';
+```
+
+After:
+
+```js
+const OtherComponent = React.lazy(() => import('./OtherComponent'));
+```
+
+React.lazy currently only supports default exports. If the module you want to import uses named exports, you can create an intermediate module that reexports it as the default. This ensures that tree shaking keeps working and that you don’t pull in unused components.
+
+### 7. SEO in React?
 
 Prerendering, Server Side rendering, Isomorphic React apps, Next.js
 
-8.	D3.js?
+### 8. D3.js?
 
-9.	Reconciliation?
+### 9. Reconciliation?
 
 Reconciliation is the process through which React updates the DOM. When a component's state changes, React has to calculate if it is necessary to update the DOM. It does this by creating a virtual DOM and comparing it with the current DOM. In this context, the virtual DOM will contain the new state of the component.
 
-10.	Testing libraries?
+The process of checking the difference between the new VDOM tree and the old VDOM tree is called "diffing".
 
-11.	Babel and Webpack?
+### 10. Testing libraries?
 
-Babel is a transpiler which it converts JSX to JS, 
+### 11. Babel and Webpack?
+
+Babel is a transpiler that compiles JavaScript ES6 to JavaScript ES5 allowing you to write JavaScript “from the future” so that current browsers will understand it
+
 Webpack is a module bundler
 
-12.	Disadvantages of React?
+### 12. Disadvantages of React?
 
-13.	Super keyword?
+i) ReactJS Covers only the UI Layers of the app and nothing else. So you still need to choose some other technologies to get a complete tooling set for development in the project.
+
+ii) ReactJS uses JSX. It's a syntax extension that allows HTML with JavaScript mixed together. This approach has its own benefits, but some members of the development community consider JSX as a barrier, especially for new developers. Developers complain about its complexity in the learning curve.
+
+### 13. Super keyword?
 
 super() will calls the constructor of its parent class. This is required when you need to access some variables from the parent class. In React, when you call super with props. React will make props available across the component through this.props .
 
-14.	This keyword?
+### 14. This keyword?
 
 The JavaScript this keyword refers to the object it belongs to. ... In a function, this refers to the global object. In a function, in strict mode, this is undefined . In an event, this refers to the element that received the event. Methods like call() , and apply() can refer this to any object.
 
-15.	Fetch vs Axios?
+### 15. Fetch vs Axios?
 
-16.	 Render() vs return()
+Key Differences: With Axios, the data is sent through the data property of the options, but Fetch API uses the body property. Fetch response requires additional validation as it always returns a response object no matter whether it is successful or not. The data in fetch() has been serialized to a String (Stringified).
+
+![image](https://user-images.githubusercontent.com/42731246/151424487-44dc66a1-2beb-45ca-aa00-15d2903969b7.png)
+
+### 16. Render() vs return()
+
+Essentially render is kind of a lifecycle method which is invoked whenever the component needs to update.
 
 In react, render is a method that tell react what to display. return in a method or function is the output of the method or function
 
-17.	PropsType?
+### 17. PropsType?
 
 PropTypes is a library that helps in minimizing this problem in React by checking the types passed in the props object against a specification we set beforehand and to raise a warning if the types passed don't match the types expected.
 
-18.	Differences between Class Components vs Functional Components?
+### 18. Differences between Class Components vs Functional Components?
 
-19.	Lifecycle methods in react javascript? Explain each and every?
+#### Functional Components
 
-20.	Correct sequence of constructor, render, componentDidMount, componentWillMount?
+i) A functional component is just a plain JavaScript function that accepts props as an argument and returns a React element.
 
-21.	What is the use of hooks?
+ii) There is no render method used in functional components.
 
-22.	Some of the hooks and their example
+iii)React lifecycle methods (for example, componentDidMount) cannot be used in functional components. Constructors are not used .React lifecycle methods can be used inside class components (for example, componentDidMount).
 
-23.	useCallback hooks usage
+#### Class Components:
 
+i)A class component requires you to extend from React Component and create a render function which returns a React element.
 
-24.	What is HOC
+ii)It must have the render() method returning HTML.
+
+iii)Constructor are used as it needs to store state.
+
+### 19. Lifecycle methods in react javascript? Explain each and every?
+
+### 20. Correct sequence of constructor, render, componentDidMount, componentWillMount?
+
+### 21. What is the use of hooks?
+
+Hooks allow you to use local state and other React features without writing a class.
+Hooks are the new feature introduced in the React 16.8 version.
+
+### 22. Some of the hooks and their example
+
+### 23. useCallback hooks usage
+
+### 24. What is HOC
+
 ![image](https://user-images.githubusercontent.com/42731246/151151594-44c9033f-d185-4b17-8dfe-e67faf004ba1.png)
 
+### 25. How to add one component in another
 
-25.	How to add one component in another
-Ans: 
+Ans:
 ![image](https://user-images.githubusercontent.com/42731246/151151609-3bd82e2a-e6f2-4790-bd63-3caee331358c.png)
 
- 
+### 26. How to pass function (ex: addTodo) from Parent component to Child?
 
-26.	 How to pass function (ex: addTodo) from Parent component to Child?
 ![image](https://user-images.githubusercontent.com/42731246/151151624-04da35e2-1925-4f22-83a0-b95def36de59.png)
 
- 
+### 27. What is redux
 
-27.	 What is redux
-![image](https://user-images.githubusercontent.com/42731246/151151656-4fec5721-cc6c-4a71-a5b0-b1eeaabc32bb.png)
+![image](https://user-images.githubusercontent.com/42731246/151427141-83f2e284-7a13-49da-aebf-3f265901728c.png)
 
+Ans: Redux is a predictable state container that helps in storing the entire application state by avoiding prop-drilling.
 
-Ans: Redux is state container that helps in storing the entire application state by avoiding prop-drilling.
-
-28.	 What is store?
+### 28. What is store?
 
 A store holds the whole state tree of your application. The only way to change the state inside it is to dispatch an action on it.
 A store is not a class. It's just an object with a few methods on it. To create it, pass your root reducing function to createStore.
 
-29.	 How to communicate both the Child elements without props?
+### 29. How to communicate both the Child elements without props?
 
-30.	 Components of redux 
+### 30. Components of redux
 
-31.	 Principles of Redux?
+There are three building parts: actions, store, and reducers.
 
-a.	Single source of truth. The global state of your application is stored in an object tree within a single store. ...
-b.	State is read-only. The only way to change the state is to emit an action, an object describing what happened. ...
-c.	Changes are made with pure functions.
+#### Actions in Redux
 
-32.	Redux thunk middleware?
+Simply put, actions are events. They are the only way you can send data from your application to your Redux store.
 
-33.	 Difference between props and state
+Actions are sent using the store.dispatch() method. Actions are plain JavaScript objects, and they must have a type property to indicate the type of action to be carried out. They must also have a payload that contains the information that should be worked on by the action. Actions are created via an action creator.
+
+Here’s an example of an action that can be carried out during login in an app:
+
+```js
+const setLoginStatus = (name, password) => {
+  return {
+    type: 'LOGIN',
+    payload: {
+      username: 'foo',
+      password: 'bar',
+    },
+  };
+};
+```
+
+#### Reducers in Redux
+
+Reducers are pure functions that take the current state of an application, perform an action, and return a new state. These states are stored as objects, and they specify how the state of an application changes in response to an action sent to the store.
+
+As pure functions, they do not change the data in the object passed to them or perform any side effect in the application. Given the same object, they should always produce the same result.
+
+```js
+const LoginComponent = (state = initialState, action) => {
+  switch (action.type) {
+    // This reducer handles any action with type "LOGIN"
+    case 'LOGIN':
+      return state.map((user) => {
+        if (user.username !== action.username) {
+          return user;
+        }
+
+        if (user.password == action.password) {
+          return {
+            ...user,
+            login_status: 'LOGGED IN',
+          };
+        }
+      });
+    default:
+      return state;
+  }
+};
+```
+
+### Store in Redux
+
+The store holds the application state. It is highly recommended to keep only one store in any Redux application. You can access the state stored, update the state, and register or unregister
+
+listeners via helper methods.
+
+```js
+import { Provider } from 'react-redux';
+import store from './store/store';
+import { BrowserRouter as Router } from 'react-router-dom';
+
+ReactDOM.render(
+  <Provider store={store}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Provider>,
+  document.getElementById('root')
+);
+```
+
+### 31. Principles of Redux?
+
+a. Single source of truth. The global state of your application is stored in an object tree within a single store.
+
+```js
+console.log(store.getState());
+```
+
+b. State is read-only. The only way to change the state is to emit an action, an object describing what happened. ...
+c. Changes are made with pure functions.
+
+### 32. Redux thunk middleware?
+
+### 33. Difference between props and state
 
 Ans: Both store information of the components but state is managed within the component whereas props is used to pass the data from parent to child component.
 
-34.	 Is react support two-way binding.
+### 34. Is react support two-way binding.
 
-Ans: React support Uni Directional data binding. i.e(from Parent to child), 
+Ans: React support Uni Directional data binding. i.e(from Parent to child),
 
-35.	What is ref in react?
+### 35. What is ref in react?
 
 Ans: Refs are a function provided by React to access the DOM element and the React element that you might have created on your own. They are used in cases where we want to change the value of a child component, without making use of props and all.
 
-36.	 How to focus the filed when the component is loaded
+### 36. How to focus the filed when the component is loaded
 
-Ans: 
+Ans:
 ![image](https://user-images.githubusercontent.com/42731246/151151731-93cd7a49-629c-436e-9253-3a7b34fdac9b.png)
 ![image](https://user-images.githubusercontent.com/42731246/151151743-9c469641-42db-4055-b6bc-3ebdcff93b2d.png)
 
- 
- 
-
-37.	 What is the use of reducers?
+### 37. What is the use of reducers?
 
 A reducer is a function which takes two arguments — the current state and an action — and returns based on both arguments a new state
 
 ![image](https://user-images.githubusercontent.com/42731246/151151769-23860186-440c-42e2-867e-89ec487fdfbf.png)
 
-
-38.	 Can I have more than one store in one application
+### 38. Can I have more than one store in one application
 
 Ans: No, in redux
 
-39.	 How to pass data from A to C
+### 39. How to pass data from A to C
 
 Ans: Declare C component in A component
 
-40.	 What is context API
+### 40. What is context API
 
 React's context allows you to share information to any component, by storing it in a central place and allowing access to any component that requests it (usually you are only able to pass data from parent to child via props).
 
-
-41.	 Import vs required
+### 41. Import vs required
 
 Ans The major difference between require and import , is that require will automatically scan node_modules to find modules, but import , which comes from ES6, won't. Most people use babel to compile import and export , which makes import act the same as require .
 
-42.	 Explain ES6 Features,
- 
-1)	const and let keywords
-2)	forEach, map, filter, every, some, find,
-3)	Arrow functions
-4)	Classes
-5)	Enhanced Object literals
-6)	Template strings
-7)	Rest and spread operators
-8)	Destructuring
-9)	Promises
+### 42. Explain ES6 Features,
 
+1. const and let keywords
+2. forEach, map, filter, every, some, find,
+3. Arrow functions
+4. Classes
+5. Enhanced Object literals
+6. Template strings
+7. Rest and spread operators
+8. Destructuring
+9. Promises
 
-43.	 What is the use of Object Destructuring?
+### 43. What is the use of Object Destructuring?
 
 It's a JavaScript feature that allows us to extract multiple pieces of data from an array or object and assign them to their own variables.
 
-44.	 How I can migrate from current React 15 project to React 16.8?
+### 44. How I can migrate from current React 15 project to React 16.8?
 
-45.	Virtual DOM vs Shadow DOM?
+### 45. Virtual DOM vs Shadow DOM?
 
 Ans: Virtual DOM is creating a copy of the whole DOM object, and Shadow DOM creates small pieces of the DOM object which has their own, isolated scope for the element they represent.
 
-46.	How to control the re- render cycle in react js
+### 46. How to control the re- render cycle in react js
 
 Ans: useMemo()- stores the state in cache and prevents unnecessary rerenders
 
-47.	useMemo vs memo
+### 47. useMemo vs memo
 
 Ans: Both memo and useMemo are used to memoize the result of a function, the only difference is memo is a HOC (and can be used to wrap both class and functional components) which useMemo is a hook (and can only be used inside functional components)
 
-
-48.	 combineReducers?
+### 48. combineReducers?
 
 The combineReducers helper function turns an object whose values are different reducing functions into a single reducing function you can pass to createStore . The resulting reducer calls every child reducer, and gathers their results into a single state object.
 
+### 49. What actually setState does in Class components?
 
-49.	 What actually setState does in Class components?
+### 50. Client-side rendering vs Server-side Rendering?
 
-50.	 Client-side rendering vs Server-side Rendering?
-
-51.	 setState inside constructor?
+### 51. setState inside constructor?
 
 setState" causes React to re-render your application and update the DOM. If you use setState in constructor you would get error like this:Can only update a mounted or mounting component. This usually means you called setState() on an unmounted component.
+
+### 52. What is strict mode react?
+
+StrictMode is a tool for highlighting potential problems in an application. Like Fragment, StrictMode does not render any visible UI. It activates additional checks and warnings for its descendants. Note: Strict mode checks are run in development mode only; they do not impact the production build.
+
+### 53. Error boundaries
+
+If the other module fails to load (for example, due to network failure), it will trigger an error. You can handle these errors to show a nice user experience and manage recovery with Error Boundaries. Once you’ve created your Error Boundary, you can use it anywhere above your lazy components to display an error state when there’s a network error.
+
+```js
+import React, { Suspense } from 'react';
+import MyErrorBoundary from './MyErrorBoundary';
+
+const OtherComponent = React.lazy(() => import('./OtherComponent'));
+const AnotherComponent = React.lazy(() => import('./AnotherComponent'));
+
+const MyComponent = () => (
+  <div>
+    <MyErrorBoundary>
+      <Suspense fallback={<div>Loading...</div>}>
+        <section>
+          <OtherComponent />
+          <AnotherComponent />
+        </section>
+      </Suspense>
+    </MyErrorBoundary>
+  </div>
+);
+```
