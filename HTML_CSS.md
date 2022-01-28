@@ -214,3 +214,11 @@ works in rem as multiply operation
 ## 38. Box-shadow
 
 x axis y axis blur spread-radius
+
+## 39. Flex vs Grid
+
+The basic difference between CSS Grid Layout and CSS Flexbox Layout is that flexbox was designed for layout in one dimension - either a row or a column. Grid was designed for two-dimensional layout - rows, and columns at the same time
+
+## 40. Position relative vs Position absolute
+
+position: relative places an element relative to its current position without changing the layout around it, whereas position: absolute places an element relative to its parent's position and changing the layout around it.

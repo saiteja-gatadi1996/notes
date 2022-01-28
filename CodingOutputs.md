@@ -174,12 +174,15 @@ Cons: Not only /about page will take time to load, but this now affects other pa
 ![image](https://user-images.githubusercontent.com/42731246/149974975-7415bcff-3c8a-4887-9629-5e3b60c2e58f.png)
 
 ## 19
+
 a=10;
 
 console.log(a);
 
 var a=20;
 
+O/p:
+![image](https://user-images.githubusercontent.com/42731246/151492687-63fd27a2-884e-4693-a412-2bda304522b3.png)
 
 ## 20
 
@@ -189,7 +192,11 @@ obj2.model= "600";
 console.log(obj1);
 console.log(obj2);
 
+![image](https://user-images.githubusercontent.com/42731246/151492604-e45cf218-d91c-4afd-8be2-1cc28b6a249b.png)
+
 ## 21
 
 let a=10;
 let a=20;
+
+![image](https://user-images.githubusercontent.com/42731246/151492543-669e6cdd-3443-4929-be10-1ce173521f80.png)
