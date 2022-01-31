@@ -50,7 +50,9 @@ O/p: Yes, this will work
 
 ## 6. find second largest number from Array
 
-## 7. let i;
+## 7.
+
+let i;
 
 for (i = 0; i < 3; i++) {
 setTimeout(()=>console.log(i), 100);
@@ -60,7 +62,9 @@ setTimeout(()=>console.log(i), 100);
 Ans: 3 3 3
 Reason: in for loop i acts as global scope
 
-## 8. function sum(a,b,c){
+## 8. 
+
+function sum(a,b,c){
 
     return a+b+c;
 
@@ -312,6 +316,7 @@ div > p
 
 ## 34
 /sum of the even numbers (which has to be squared)
+
 const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const evenNumbers = array
   .filter((item) => item % 2 == 0)
@@ -320,8 +325,13 @@ const evenNumbers = array
 
 console.log(evenNumbers);
 
+
+### What will this print ?
 const filteredItems = array.filter(() => 0);
 console.log(filteredItems);
+
+
+### Print the value based on the query params and second key value pair (&)
 
 const url =
   "https://codesandbox.io/s/little-darkness-qsymi?file=/src/index.js:205-267&name=saiteja";
