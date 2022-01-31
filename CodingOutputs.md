@@ -314,8 +314,7 @@ div p
 div > p
 
 
-## 34
-/sum of the even numbers (which has to be squared)
+## 34 sum of the even numbers (which has to be squared)
 
 const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const evenNumbers = array
