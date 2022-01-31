@@ -310,6 +310,24 @@ div p
 div > p
 
 
+## 34
+/sum of the even numbers (which has to be squared)
+const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const evenNumbers = array
+  .filter((item) => item % 2 == 0)
+  .map((item) => item * item)
+  .reduce((item1, item2) => item1 + item2);
+
+console.log(evenNumbers);
+
+const filteredItems = array.filter(() => 0);
+console.log(filteredItems);
+
+const url =
+  "https://codesandbox.io/s/little-darkness-qsymi?file=/src/index.js:205-267&name=saiteja";
+
+console.log(url.split("=") )
+
 
 
 
