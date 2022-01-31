@@ -200,3 +200,165 @@ let a=10;
 let a=20;
 
 ![image](https://user-images.githubusercontent.com/42731246/151492543-669e6cdd-3443-4929-be10-1ce173521f80.png)
+
+## 22
+
+1 + "12"
+
+## 23
+0 - "10"
+
+## 24
+"11" + 1
+
+## 25
+"10" + -1
+
+null === undefined
+
+null == undefined
+
+
+## 26
+
+let a =10;
+
+function func(){
+
+console.log(a)
+
+}
+
+
+func()
+
+
+## 27 
+'use strict'
+
+var a= 10
+
+console.log(a
+
+var a= 20
+
+## 28 Without use strict
+var a= 10
+
+console.log(a)
+
+var a= 20
+
+console.log(a)
+
+## 29
+
+function func(a){
+let fname = "Singh";
+a()
+}
+
+func a (fname){
+
+
+
+});
+
+Ans:
+function func(a){
+let fname = "Singh";
+a(fname) //pass
+}
+
+func a (fname){
+console.log(fname)
+
+
+});
+
+
+## 30
+
+let array = [1,1,3,6,5,6];
+let result = [...new Set(array)];
+console.log(result);
+
+
+## 31
+
+const a = "12";
+a = 11
+console.log(a);
+
+## 32
+
+const Employee = {
+firstname: 'John',
+lastname: 'Doe'
+};
+Employee.firstname = "Singh";
+console.log(Employee.firstname);
+
+## 33 CSS related
+
+div, p
+
+div+p
+
+div p
+
+div > p
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
