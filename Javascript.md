@@ -21,7 +21,8 @@ This monitors the Call Stack and the Call-back Queue. If the Call Stack is empty
 
 Note: You can call the function declaration (line 46) before the function is initialized (at line 41-No error), whereas function expression (line 52) cannot be called before initialized (at line 47-Ref Error). This is due to hoisting.
 
-![alt text](https://user-images.githubusercontent.com/42731246/142735156-d102c2e9-92b0-4de6-8094-2629bd1ef66d.png)
+![image](https://user-images.githubusercontent.com/42731246/152095426-c7074419-f6d3-4067-8964-2a480a6d032c.png)
+
 
 Data flow when a function gets called inside another function
 ![alt text](https://user-images.githubusercontent.com/42731246/142735165-cdbae898-cf1d-4185-8964-80ca0066903d.png)
