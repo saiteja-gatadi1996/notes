@@ -19,9 +19,13 @@ This monitors the Call Stack and the Call-back Queue. If the Call Stack is empty
 
 ## 5. Function declaration vs Function expression
 
-This is due to hoisting.
+This is due to hoisting. 
+
+Note: Only Variable declarations or functional declarations are moved to top.
 
 ![image](https://user-images.githubusercontent.com/42731246/152095426-c7074419-f6d3-4067-8964-2a480a6d032c.png)
+
+![image](https://user-images.githubusercontent.com/42731246/152095693-ac9e3eae-db1c-4265-a04e-0429b560ee5f.png)
 
 
 Data flow when a function gets called inside another function
