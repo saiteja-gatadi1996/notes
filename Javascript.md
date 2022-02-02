@@ -19,7 +19,7 @@ This monitors the Call Stack and the Call-back Queue. If the Call Stack is empty
 
 ## 5. Function declaration vs Function expression
 
-Note: You can call the function declaration (line 46) before the function is initialized (at line 41-No error), whereas function expression (line 52) cannot be called before initialized (at line 47-Ref Error). This is due to hoisting.
+This is due to hoisting.
 
 ![image](https://user-images.githubusercontent.com/42731246/152095426-c7074419-f6d3-4067-8964-2a480a6d032c.png)
 
