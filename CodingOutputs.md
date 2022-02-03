@@ -390,17 +390,46 @@ Create a search bar which:
 
 
 
+## 43
+var a=2;
+a++;
+console.log(a);
+const d = [1,2,3]
+d.push(5);
+console.log(d);
+const b=2;
+b++;
+console.log(b);
+const c= [2];
+c[0]++
+console.log(c);
 
 
+## 44
+
+var a = b();
+console.log(a);
+var c = d();
+function b(){
+return c;
+}
+console.log(a);
+var d = function(){
+return b();
+}
+console.log
 
 
+## 45
 
-
-
-
-
-
-
+function a(){
+for(var i =0; i<10; i++){
+setTimeout(() => {
+console.log(i)
+}, i*1000)
+}
+}
+a();
 
 
 
