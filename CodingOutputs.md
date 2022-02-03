@@ -325,12 +325,12 @@ const evenNumbers = array
 console.log(evenNumbers);
 
 
-### What will this print ?
+## 35 What will this print ?
 const filteredItems = array.filter(() => 0);
 console.log(filteredItems);
 
 
-### Print the value based on the query params and second key value pair (&)
+## 36 Print the value based on the query params and second key value pair (&)
 
 const url =
   "https://codesandbox.io/s/little-darkness-qsymi?file=/src/index.js:205-267&name=saiteja";
@@ -338,13 +338,15 @@ const url =
 console.log(url.split("=") )
 
 
+## 37
+
 var objA = {prop1: 42};
 var objB = objA;
 objB.prop1 = 90;
 console.log(objA)
 
 
-
+## 38
 (function() {
 var objA = new Object({foo: "foo"});
 var objB = new Object({foo: "foo"});
@@ -353,39 +355,36 @@ console.log(objA === objB);
 }());
 
 
+## 39
 for (var i = 0; i < 3; i++) {
 setTimeout(() => console.log(i), 1);
 }
 
 
-
+## 40
 for (let i = 0; i < 3; i++) {
 setTimeout(() => console.log(i), 1);
 }
 
 
+## 41
 var x = {name:10};
 var y = {...x};
 y.name=20
-
 
 
 console.log(x);
 console.log(y);
 
 
+## 42 Exercise with React.js 
+
 Create a search bar which:
 1.Fetches data from an API : https://dummy.restapiexample.com/api/v1/employees
 
-
-
 2. Display the search results that match the employee name typed in search bar (api should be called after a minimum of three characters typed in search bar)
 
-
-
 3. On clicking any searched Employee name, take to a dummy page, pass that employee name to the URL which opens when you select from the searched results.
-
-
 
 4. A cross mark to clear the search bar.
 
