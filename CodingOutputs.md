@@ -391,18 +391,19 @@ Create a search bar which:
 
 
 ## 43
-var a=2;
+var a = 2;
 a++;
-console.log(a);
-const d = [1,2,3]
+console.log(a); // 3
+const d = [1, 2, 3];
 d.push(5);
-console.log(d);
-const b=2;
+console.log(d); // [1,2,3,5]
+const b = 2;
 b++;
-console.log(b);
-const c= [2];
-c[0]++
+console.log(b); // TypeError: Assignment to constant variable
+const c = [2]; //nothing prints from this line
+c[0]++;
 console.log(c);
+
 
 
 ## 44
