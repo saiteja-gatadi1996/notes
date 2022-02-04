@@ -433,18 +433,50 @@ console.log(i)
 a();
 
 
+## Design this in less than 30 minutes
+![image](https://user-images.githubusercontent.com/42731246/152519562-3d8001fd-f083-4e54-976c-8617519eeec4.png)
 
+##
+var myObject = {
+    foo: "bar",
+    func: function() {
+        var self = this;
+        console.log("outer func:  this.foo = " + this.foo);
+        console.log("outer func:  self.foo = " + self.foo);
+        (function() {
+            console.log("inner func:  this.foo = " + this.foo);
+            console.log("inner func:  self.foo = " + self.foo);
+        }());
+    }
+};
+myObject.func();
 
+outer func:  this.foo = bar
+outer func:  self.foo = bar
+inner func:  this.foo = undefined
+inner func:  self.foo = bar
 
+##
+function foo1()
+{
+  return {
+      bar: "hello"
+  };
+}
 
+function foo2()
+{
+  return
+  {
+      bar: "hello"
+  };
+}
 
-
-
-
-
-
-
-
+## Output:
+foo1 returns:
+Object {bar: "hello"}
+foo2 returns:
+undefined 
 
 
 
