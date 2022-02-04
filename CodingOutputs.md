@@ -479,12 +479,34 @@ foo2 returns:
 undefined 
 
 
+## Output of the question
+
+var output = (function(x) {  
+
+delete x;  
+
+return x;  
+
+})(0);  
+
+console.log(output); 
 
 
+## How to empty an array
+let a = [1, 6, 8, 9]
 
+## only print defined values
+let b = [1, 2, , 4, 5] 
 
+output should be [1, 2, 4, 5]
 
+## Remove duplicates
+let c = [1, 2, 3, 2, 5, 3] 
 
+## Nested Arrays
+let a = [1, 2, [3, 4, [5, 6, [7, 8, [9, 10]]]]]; 
+
+output should be [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 
 
