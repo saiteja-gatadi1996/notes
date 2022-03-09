@@ -495,13 +495,24 @@ console.log(output);
 ## How to empty an array
 let a = [1, 6, 8, 9]
 
+I only know this :D
+![image](https://user-images.githubusercontent.com/42731246/157432109-40d06b7e-6ff2-45ad-8183-6099bb881dc9.png)
+
+
 ## only print defined values
 let b = [1, 2, , 4, 5] 
 
 output should be [1, 2, 4, 5]
 
+![image](https://user-images.githubusercontent.com/42731246/157432025-07b3d0e6-7098-415e-9178-cf344035e8ec.png)
+
+
+
 ## Remove duplicates
 let c = [1, 2, 3, 2, 5, 3] 
+
+![image](https://user-images.githubusercontent.com/42731246/157431756-89909225-d3d0-4efa-b5a8-e55e9de24e57.png)
+
 
 ## Nested Arrays
 let a = [1, 2, [3, 4, [5, 6, [7, 8, [9, 10]]]]]; 
