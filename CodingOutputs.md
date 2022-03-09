@@ -508,6 +508,7 @@ let a = [1, 2, [3, 4, [5, 6, [7, 8, [9, 10]]]]];
 
 output should be [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
+![image](https://user-images.githubusercontent.com/42731246/157431479-ca9028f4-596b-4541-9b53-e2cf67892cd6.png)
 
 
 
