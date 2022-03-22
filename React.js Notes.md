@@ -25,3 +25,42 @@ Essentially, Webpack works as a module bundler, the main features of Webpack wou
 ### 3. Babel
 
 Babel is a JavaScript transpiler that converts the newest JavaScript into the good old JavaScript so we can use all the newest features of the JavaScript language. So think things like an spread operator, destructuring and all the other goodies that come with ES6. And behind the scenes babel will turn into ES5, which in turn will make sure that our app runs smoothly in the older browsers as well.
+
+### 4. First Component
+
+###### This is mentioned in the index.html file in public folder
+
+```js
+<div id='root'></div>
+```
+
+```js
+import React from 'react';
+import ReactDom from 'react-dom';
+
+function Greeting() {
+  return <h4> this is SaiTeja and this is my first component </h4>;
+}
+
+ReactDom.render(<Greeting />, document.getElementById('root'));
+```
+
+### 5. JSX Rules
+
+![image](https://user-images.githubusercontent.com/42731246/159543496-b224585f-2690-48cd-b585-129012574a5a.png)
+
+### 6. Children Prop
+
+i) Component Book is now written in below format and we are inserting paragraph (p tag) at line 26 which is in between the Book component
+
+```js
+<Book></Book>
+```
+
+![image](https://user-images.githubusercontent.com/42731246/159547988-b3f1c590-2480-4318-b104-907bd7811e80.png)
+
+To access the p tag, the Book Component should have a children prop like below
+
+![image](https://user-images.githubusercontent.com/42731246/159548627-8ee13592-f041-4a5a-9dba-191b317ab21f.png)
+
+![image](https://user-images.githubusercontent.com/42731246/159548776-af11b923-3d8e-43c7-a8c5-43c186be9044.png)
