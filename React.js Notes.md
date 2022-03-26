@@ -230,3 +230,150 @@ Added a new button which should increase the counter value after 2 seconds
 ##### If we click the button 10 times, it will only update once (if we use commented way of setValue(value+1) code)
 
 ![image](https://user-images.githubusercontent.com/42731246/160239864-03b39355-e7cf-4854-a952-432e9e71ac7d.png)
+
+### 10. Advanced React- useEffect
+
+###### by default useEffect will runs after every re-render (Each and everytime we re-run the component, useEffect will run)
+
+Every time we click notice we're updating the value , we're calling the useEffect after every render.
+And of course, the functionality that is within the useEffect also runs because now I have document.title (This happens because useState helps us to re-render the component and preserves the value between the re-renders, In a similar way by default useEffect will run after every re-render (so inside useEffect we are writing the document.title to change as per the value change))
+
+![image](https://user-images.githubusercontent.com/42731246/160252796-b8546be5-9900-4002-a530-c57489aa6851.png)
+
+#### Incase if I want my title to showcase only when I receive messages (ex: 1 )
+
+#### Do's (Conditional rendering of hooks)
+
+![image](https://user-images.githubusercontent.com/42731246/160252828-4d4ff777-aa68-44b3-b792-b8120b9b569a.png)
+
+#### Don't
+
+![image](https://user-images.githubusercontent.com/42731246/160252906-8f96e800-4d2e-4411-9c0d-3f2dc1d19f29.png)
+
+#### useEffect with dependency array
+
+![image](https://user-images.githubusercontent.com/42731246/160253228-b995af9a-cfee-443d-8647-c49756ed0786.png)
+
+#### useEffect with cleanup Function
+
+![image](https://user-images.githubusercontent.com/42731246/160253693-ec309809-b027-4fef-a098-c41360aa151a.png)
+
+#### useEffect- Fetch Data
+
+### make sure to add dependency array as we only want to fetch the json data during initial render. (Also we want to avoid re-rendering)
+
+![image](https://user-images.githubusercontent.com/42731246/160253778-53a3bd04-3507-43e6-8ab6-91c9f0f8ce11.png)
+
+### Multiple returns basics
+
+![image](https://user-images.githubusercontent.com/42731246/160253871-8b329504-40b7-46f5-8efc-061304d9da57.png)
+
+### Fetching Example (Good Example)
+
+```js
+import React, { useState, useEffect } from 'react';
+const url = 'https://api.github.com/users/QuincyLarson';
+const MultipleReturns = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+  const [user, setUser] = useState('default user');
+
+  useEffect(() => {
+    fetch(url)
+      .then((resp) => {
+        if (resp.status >= 200 && resp.status <= 299) {
+          return resp.json();
+        } else {
+          setIsLoading(false);
+          setIsError(true);
+          throw new Error(resp.statusText);
+        }
+      })
+      .then((user) => {
+        const { login } = user;
+        setUser(login);
+        setIsLoading(false);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div>
+        <h1>Loading...</h1>
+      </div>
+    );
+  }
+  if (isError) {
+    return (
+      <div>
+        <h1>Error....</h1>
+      </div>
+    );
+  }
+  return (
+    <div>
+      <h1>{user}</h1>
+    </div>
+  );
+};
+
+export default MultipleReturns;
+```
+
+### Short circuit Evaluation
+
+On line 6 (text is empty, that means false)
+On line 15 (as text value returns false, it looks for john value)
+On line 16 (as text value returns false, it doesn't print hello world)
+On line 17 (as text value returns true (reversed), it does print hello world)
+![image](https://user-images.githubusercontent.com/42731246/160254203-c708adbe-455f-430a-a033-03504ccd8997.png)
+
+### Ternary Operator Evaluation
+
+isError is defined as useState hook (which declared as boolean value)
+If isError is true we would see there is an error would print up else there is no error would printup
+
+![image](https://user-images.githubusercontent.com/42731246/160254343-6edc872d-6f30-4169-8565-1f5dc31a86ff.png)
+
+### Show/Hide logic using useState, useEffect
+
+Every time show is true, we are running Item component.
+
+```js
+import React, { useState, useEffect } from 'react';
+
+const ShowHide = () => {
+  const [show, setShow] = useState(false);
+  return (
+    <>
+      <button className='btn' onClick={() => setShow(!show)}>
+        show/hide
+      </button>
+      {show && <Item />}
+    </>
+  );
+};
+
+const Item = () => {
+  const [size, setSize] = useState(window.innerWidth);
+  const checkSize = () => {
+    setSize(window.innerWidth);
+  };
+  useEffect(() => {
+    window.addEventListener('resize', checkSize);
+    return () => {
+      window.removeEventListener('resize', checkSize);
+    };
+  }, []);
+
+  return (
+    <div style={{ marginTop: '2rem' }}>
+      <h1>Window</h1>
+      <h2>size : {size}</h2>
+    </div>
+  );
+};
+
+export default ShowHide;
+```
