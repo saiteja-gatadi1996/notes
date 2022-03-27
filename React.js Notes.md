@@ -231,7 +231,7 @@ Added a new button which should increase the counter value after 2 seconds
 
 ![image](https://user-images.githubusercontent.com/42731246/160239864-03b39355-e7cf-4854-a952-432e9e71ac7d.png)
 
-### 10. Advanced React- useEffect
+### 11. Advanced React- useEffect
 
 ###### by default useEffect will runs after every re-render (Each and everytime we re-run the component, useEffect will run)
 
@@ -454,4 +454,157 @@ const ControlledInputs = () => {
 };
 
 export default ControlledInputs;
+```
+
+### Multiple Inputs (Dynamically store the input value)
+
+```js
+import React, { useState } from 'react';
+// JS
+// const input = document.getElementById('myText');
+// const inputValue = input.value
+// React
+// value, onChange
+
+const ControlledInputs = () => {
+  const [person, setPerson] = useState({ firstName: '', email: '', age: '' });
+  const [people, setPeople] = useState([]);
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setPerson({ ...person, [name]: value });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (person.firstName && person.email && person.age) {
+      const newPerson = { ...person, id: new Date().getTime().toString() };
+      setPeople([...people, newPerson]);
+      setPerson({ firstName: '', email: '', age: '' });
+    }
+  };
+  return (
+    <>
+      <article className='form'>
+        <form>
+          <div className='form-control'>
+            <label htmlFor='firstName'>Name : </label>
+            <input
+              type='text'
+              id='firstName'
+              name='firstName'
+              value={person.firstName}
+              onChange={handleChange}
+            />
+          </div>
+          <div className='form-control'>
+            <label htmlFor='email'>Email : </label>
+            <input
+              type='email'
+              id='email'
+              name='email'
+              value={person.email}
+              onChange={handleChange}
+            />
+          </div>
+          <div className='form-control'>
+            <label htmlFor='age'>Age : </label>
+            <input
+              type='number'
+              id='age'
+              name='age'
+              value={person.age}
+              onChange={handleChange}
+            />
+          </div>
+          <button type='submit' className='btn' onClick={handleSubmit}>
+            add person
+          </button>
+        </form>
+      </article>
+      <article>
+        {people.map((person) => {
+          const { id, firstName, email, age } = person;
+          return (
+            <div key={id} className='item'>
+              <h4>{firstName}</h4>
+              <p>{email}</p>
+              <p>{age}</p>
+            </div>
+          );
+        })}
+      </article>
+    </>
+  );
+};
+
+export default ControlledInputs;
+```
+
+### 12. Advanced React- useRef
+
+#####useState does trigger the re-renders and preseve the value whereas useRef doesn't trigger re-render but preserve the value
+
+![image](https://user-images.githubusercontent.com/42731246/160294468-1792f1e3-6240-46cb-b3f0-76485e5d1a41.png)
+
+![image](https://user-images.githubusercontent.com/42731246/160294812-ea04344f-a06a-4de1-9786-1cf68f10ebbd.png)
+
+we don't need to useEffect with dependency array (as this logic will anyhow doesn't trigger re-render)
+
+focus is to focus the input field upon initial render(component loaded for the first time)
+
+![image](https://user-images.githubusercontent.com/42731246/160294837-a58e9826-41d9-43b6-ae19-cba8bd647375.png)
+
+### 13. Advanced React- useReducer
+
+#### Code differences between Todo app (useState vs useReducer)
+
+##### i) Todo with useState
+
+```js
+import React, { useState } from 'react';
+import Modal from './Modal';
+import { data } from '../../../data';
+
+const Index = () => {
+  const [name, setName] = useState('');
+  const [people, setPeople] = useState(data);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (name) {
+      setShowModal(true);
+      setPeople([...people, { id: new Date().getTime().toString(), name }]);
+      setName('');
+    } else {
+      setShowModal(true);
+    }
+  };
+
+  return (
+    <>
+      {showModal && <Modal />}
+      <form onSubmit={handleSubmit}>
+        <div>
+          <input
+            type='text'
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+
+        <button type='submit'>add</button>
+      </form>
+
+      {people.map((person) => {
+        return (
+          <div key={person.id}>
+            <h4>{person.name}</h4>
+          </div>
+        );
+      })}
+    </>
+  );
+};
+
 ```
