@@ -157,7 +157,31 @@ on line 5, if we invoke this function, we would see that returns an array, and t
 
 ### Good example of useState
 
-![image](https://user-images.githubusercontent.com/42731246/160237562-84e5a1c1-12bd-433c-99f3-2b5b01f189ec.png)
+```js
+import React, { useState } from 'react';
+
+const UseStateBasics = () => {
+  const [text, setText] = useState('random title');
+  const handleClick = () => {
+    if (text === 'random title') {
+      setText('hello world');
+    } else {
+      setText('random title');
+    }
+  };
+
+  return (
+    <React.Fragment>
+      <h1>{text}</h1>
+      <button type='button' className='btn' onClick={handleClick}>
+        change title
+      </button>
+    </React.Fragment>
+  );
+};
+
+export default UseStateBasics;
+```
 
 ### General use of Hooks
 
@@ -606,5 +630,641 @@ const Index = () => {
     </>
   );
 };
-
 ```
+
+#### useReducer-Basics
+
+When we are invoking useReducer we are getting two things back
+
+i) state, which is a value( we can call anything),
+ii) dispatch, which is a function (we can call anything)
+
+In the useReducer, the first thing we pass is the reducer function, the second thing is initialState
+
+//reducer function manipulates the state
+i) This reducer function looks for the two things (state that is right before the update, action (of what are we trying to do ))
+
+##### Note: Always return the state in the reducer function
+
+###### In short terms: useReducer looks for a reducer function which actually manipulates the state and it will happen once we dispatch the action
+
+//initialState
+ii) we use this as an object that have various properties (ex: people: [], loading:false, error:false)
+
+##### To access these defaultState values (we need to write jsx like state.isModalOpen (this is due to line 13))
+
+![image](https://user-images.githubusercontent.com/42731246/160296502-2a0cea76-ae46-47d7-adc8-84b5015456dd.png)
+
+##### ii) Todo with useReducer
+
+##### index.js
+
+```js
+import React, { useState, useReducer } from 'react';
+import Modal from './Modal';
+import { data } from '../../../data';
+// reducer function
+import { reducer } from './reducer';
+const defaultState = {
+  people: [],
+  isModalOpen: false,
+  modalContent: '',
+};
+const Index = () => {
+  const [name, setName] = useState('');
+  const [state, dispatch] = useReducer(reducer, defaultState);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (name) {
+      const newItem = { id: new Date().getTime().toString(), name };
+      dispatch({ type: 'ADD_ITEM', payload: newItem });
+      setName('');
+    } else {
+      dispatch({ type: 'NO_VALUE' });
+    }
+  };
+  const closeModal = () => {
+    dispatch({ type: 'CLOSE_MODAL' });
+  };
+  return (
+    <>
+      {state.isModalOpen && (
+        <Modal closeModal={closeModal} modalContent={state.modalContent} />
+      )}
+      <form onSubmit={handleSubmit} className='form'>
+        <div>
+          <input
+            type='text'
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <button type='submit'>add </button>
+      </form>
+      {state.people.map((person) => {
+        return (
+          <div key={person.id} className='item'>
+            <h4>{person.name}</h4>
+            <button
+              onClick={() =>
+                dispatch({ type: 'REMOVE_ITEM', payload: person.id })
+              }
+            >
+              remove
+            </button>
+          </div>
+        );
+      })}
+    </>
+  );
+};
+
+export default Index;
+```
+
+##### Modal.js
+
+```js
+import React, { useEffect } from 'react';
+
+const Modal = ({ modalContent, closeModal }) => {
+  useEffect(() => {
+    setTimeout(() => {
+      closeModal();
+    }, 3000);
+  });
+  return (
+    <div className='modal'>
+      <p>{modalContent}</p>
+    </div>
+  );
+};
+
+export default Modal;
+```
+
+##### reducer.js
+
+```js
+export const reducer = (state, action) => {
+  if (action.type === 'ADD_ITEM') {
+    const newPeople = [...state.people, action.payload];
+    return {
+      ...state,
+      people: newPeople,
+      isModalOpen: true,
+      modalContent: 'item added',
+    };
+  }
+  if (action.type === 'NO_VALUE') {
+    return { ...state, isModalOpen: true, modalContent: 'please enter value' };
+  }
+  if (action.type === 'CLOSE_MODAL') {
+    return { ...state, isModalOpen: false };
+  }
+  if (action.type === 'REMOVE_ITEM') {
+    const newPeople = state.people.filter(
+      (person) => person.id !== action.payload
+    );
+    return { ...state, people: newPeople };
+  }
+  throw new Error('no matching action type');
+};
+```
+
+### Prop-Drilling Example
+
+i) We have passed people data, removePerson function as props to List component
+
+ii) Now in the List component we accepted them as props by destructuring.
+
+iii) Inside the list component, we are using people data to map each and every person in the list and then passing them as props again to SinglePerson Component
+
+iv) Inside the SinglePerson component, we accepted props (id means key prop, name is one of the property from person prop which is passed as spread operator, and removePerson logic is what was prop drilled from PropDrilling component to SinglePersonComponent)
+
+v) This is what Prop-Drilling is, as we can see that List doesn't even require removePerson logic but we don't had another chance as we have to declare it just to use this removePerson logic in the successive child component.
+
+vi) We can use useContext in this case to get rid of Prop-Drilling
+
+vii) We can also use Redux but as the application grows bigger it is suggested to use Redux.
+
+```js
+import React, { useState } from 'react';
+import { data } from '../../../data';
+// more components
+// fix - context api, redux (for more complex cases)
+
+const PropDrilling = () => {
+  const [people, setPeople] = useState(data);
+  const removePerson = (id) => {
+    setPeople((people) => {
+      return people.filter((person) => person.id !== id);
+    });
+  };
+  return (
+    <section>
+      <h3>prop drilling</h3>
+      <List people={people} removePerson={removePerson} />
+    </section>
+  );
+};
+
+const List = ({ people, removePerson }) => {
+  return (
+    <>
+      {people.map((person) => {
+        return (
+          <SinglePerson
+            key={person.id}
+            {...person}
+            removePerson={removePerson}
+          />
+        );
+      })}
+    </>
+  );
+};
+
+const SinglePerson = ({ id, name, removePerson }) => {
+  return (
+    <div className='item'>
+      <h4>{name}</h4>
+      <button onClick={() => removePerson(id)}>remove</button>
+    </div>
+  );
+};
+
+export default PropDrilling;
+```
+
+### Context API/useContext
+
+i) Well, first, we would need to create the context.
+
+```js
+const PersonContext = React.createContext();
+```
+
+ii) Now, the moment we do that now, we have access to two components, the provider and the consumer.
+
+```js
+// two components - Provider, Consumer
+```
+
+iii) So with the arrival of use context, we won't use the consumer.
+iv) Previously, before the useContext hook was introduced, we were using the consumer. However, now we don't have to.
+v) We get essentially two components back once you set up that create context and the way you access those components, you're going to go with PersonContext and then PersonContext.Provider or PersonContext.Consumer
+vi) So the thing is, provider works as a distributor. So, look for your root component and then in the return of the root Component you would want to wrap in PersonContext and then the provider.
+
+Ex: Refer Code below (ContextAPI is our root component and in that return we are now wrapping in PersonContext and then the Provider)
+
+```js
+const ContextAPI = () => {
+  const [people, setPeople] = useState(data);
+  const removePerson = (id) => {
+    setPeople((people) => {
+      return people.filter((person) => person.id !== id);
+    });
+  };
+
+  return (
+    <PersonContext.Provider value={{ removePerson, people }}>
+      <h3>Context API / useContext</h3>
+      <List />
+    </PersonContext.Provider>
+  );
+};
+```
+
+vi) As observed for Provider we are having value prop, we can access this value using useContext.
+
+vii) Now to access whatever we passed in the value prop (removePerson) in another Component (Ex: SinglePerson), make sure to use useContext hook and inside this useContext hook we need to pass in the Context that we have created (PersonContext)
+
+```js
+const SinglePerson = ({ id, name }) => {
+  const { removePerson } = useContext(PersonContext);
+
+  return (
+    <div className='item'>
+      <h4>{name}</h4>
+      <button onClick={() => removePerson(id)}>remove</button>
+    </div>
+  );
+};
+```
+
+If else you want value prop in List Component, refer to the example code
+
+Note: When we log mainData---> we get this as object which has all the properties like people, removePerson.
+
+If we want we can directly destructure which is something like below
+
+```js
+const { people } = useContext(PersonContext);
+```
+
+```js
+const List = () => {
+  const mainData = useContext(PersonContext);
+  console.log(mainData);
+  return (
+    <>
+      {mainData.people.map((person) => {
+        return <SinglePerson key={person.id} {...person} />;
+      })}
+    </>
+  );
+};
+```
+
+###### Quick Summary till point 7:
+
+###### We have a PersonContext.Provider that needs to wrap your whole component tree or whole application.
+
+###### When we talk about PersonContext, we need to pass this PersonContext into the useContext hook
+
+### Custom Hooks
+
+i) Custom Hooks helps us in reusing the functionality(fetching data, saving to local storage)
+ii) return an object with values such as loading, products (by the way, naming convention can be anything)
+iii) CustomHook requires an url and the component should update everytime the url changes
+iv) Custom Hooks works when we use (use keyword --->Ex: useFetch)
+
+##### We are using below custom Hook (useFetch ) and importing in the another component (Example Component)
+
+##### Code of custom hook, (with this code, console would be showing a warning as a missing dependency inside the useEffect )
+
+```js
+import { useState, useEffect, useCallback } from 'react';
+
+export const useFetch = (url) => {
+  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState([]);
+
+  const getProducts =async () => {
+    const response = await fetch(url);
+    const products = await response.json();
+    setProducts(products);
+    setLoading(false);
+  }, [url];
+
+  useEffect(() => {
+    getProducts();
+  }, [url]);
+  return { loading, products };
+};
+```
+
+##### Code of custom hook, to resolve missing dependency inside the useEffect
+
+```js
+import { useState, useEffect, useCallback } from 'react';
+
+export const useFetch = (url) => {
+  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState([]);
+
+  const getProducts = useCallback(async () => {
+    const response = await fetch(url);
+    const products = await response.json();
+    setProducts(products);
+    setLoading(false);
+  }, [url]);
+
+  useEffect(() => {
+    getProducts();
+  }, [url, getProducts]);
+  return { loading, products };
+};
+```
+
+###### In our above case getProducts is added to the dependency array inside useEffect. This works correctly only when the getProducts function is wrapped with useCallback as now it checks for the url dependency array and it only create the function or trigger the re-render when url gets updated.
+
+###### In case if we directly add getProducts in useEffect dependency array and if we haven't wrapped our function inside useCallback then it would lead to an infinite loop.
+
+###### If it sounds confusing, refer to the further examples on useCallback
+
+##### As we were returning object in our Custom Hook and we used useState in our Custom Hook which usually returns an array and we do array destructuring.
+
+```js
+import React, { useState, useEffect } from 'react';
+import { useFetch } from './2-useFetch';
+
+const url = 'https://course-api.com/javascript-store-products';
+
+const Example = () => {
+  const { loading, products } = useFetch(url);
+  console.log(products);
+  return (
+    <div>
+      <h2>{loading ? 'loading...' : 'data'}</h2>
+    </div>
+  );
+};
+
+export default Example;
+```
+
+### PropTypes
+
+i) We'll have to set up a prop types property on the component. So we go with the name of the component.
+
+In this case it is a product and then we go with prop types. So that is the name of the property.
+
+Note: Instead of breaking your application (blank page or unexpected behaviour), PropTypes help you by throwing those logs in the console saying you need to do something because the props that you are expecting well, in one of the items, they are missing.
+
+ii) To handle these situations, we can use short circuit operators or default props
+
+```js
+import PropTypes from 'prop-types';
+import defaultImage from '../../../assets/default-image.jpeg';
+const Product = ({ image, name, price }) => {
+  const url = image && image.url;
+  return (
+    <article className='product'>
+      <img src={url || defaultImage} alt={name || 'default name'} />
+      <h4>{name}</h4>
+      <p>${price || 3.99}</p>
+    </article>
+  );
+};
+
+Product.propTypes = {
+  image: PropTypes.object.isRequired,
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+};
+// Product.defaultProps = {
+//   name: 'default name',
+//   price: 3.99,
+//   image: defaultImage,
+// };
+
+export default Product;
+```
+
+### Performance Optimization
+
+![image](https://user-images.githubusercontent.com/42731246/161441383-75ef39cb-0a2a-400e-a158-2b3529a8c1ea.png)
+
+### i) React.memo
+
+As useState triggers the re-render for everytime the value changes, our entire components gets re-renders everytime we click on count button (which should not be the case)
+
+With React.memo (we should actually need to wrap it to the whole component) as it will check if the value of props or state is changed, in our case it was products which was passed as props which was not changing and in this case React.memo works good
+
+```js
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { useFetch } from '../../9-custom-hooks/final/2-useFetch';
+
+const url = 'https://course-api.com/javascript-store-products';
+
+// every time props or state changes, component re-renders
+
+const Index = () => {
+  const { products } = useFetch(url);
+  const [count, setCount] = useState(0);
+
+  return (
+    <>
+      <h1>Count : {count}</h1>
+      <button className='btn' onClick={() => setCount(count + 1)}>
+        click me
+      </button>
+      <BigList products={products} />
+    </>
+  );
+};
+
+const BigList = React.memo(({ products }) => {
+  return (
+    <section className='products'>
+      {products.map((product) => {
+        return <SingleProduct key={product.id} {...product}></SingleProduct>;
+      })}
+    </section>
+  );
+});
+
+const SingleProduct = ({ fields }) => {
+  let { name, price } = fields;
+  price = price / 100;
+  const image = fields.image[0].url;
+
+  return (
+    <article className='product'>
+      <img src={image} alt={name} />
+      <h4>{name}</h4>
+      <p>${price}</p>
+    </article>
+  );
+};
+export default Index;
+```
+
+###### React.memo has its own disadvantages (when something like a function AddToCart is passed as props to the SingleProduct)
+
+###### In addToCart function, the value is changing everytime and whenver this is passed as props, the SingleProduct component is getting re-rendered everytime the value changes.
+
+```js
+const addToCart = () => setCart(cart + 1);
+```
+
+```js
+const SingleProduct = ({ fields, addToCart }) => {
+  let { name, price } = fields;
+  price = price / 100;
+  const image = fields.image[0].url;
+
+  // useEffect(() => {
+  //   console.count('hello from product');
+  // });
+  return (
+    <article className='product'>
+      <img src={image} alt={name} />
+      <h4>{name}</h4>
+      <p>${price}</p>
+      <button onClick={addToCart}>add to cart</button>
+    </article>
+  );
+};
+```
+
+So that's why React thinks that, this value changed and that's why, again, we're triggering the re-rendering.
+
+Now, what is the solution? The solution is using useCallback, which essentially is somewhat similar like we were doing with a memo but now it is going to do with the function.
+
+Which is similarly like (look up for the value of the function is changed or not (If changes --> Need to re-create the function))
+
+### useCallback
+
+We wrap our function in the parentheses, But also what I would want is the dependancy (So now we create this function only when we update the cart value)
+
+If we don't add the cart as the dependency, cart value will be always zero only
+
+This is because even though my value got updated in the state, since I didn't create this below function due to empty dependency when the cart state value changed, we will be always sitting on the zero.
+
+That is why adding cart as dependency array is very important
+
+```js
+const addToCart = useCallback(() => {
+  setCart(cart + 1);
+}, [cart]);
+```
+
+### useMemo
+
+Instead of memoizing the function(which we have seen the useCallback was dealing), here useMemo deals with memoizing the value
+
+In our below example, calculateMostExpension function will return some value and in this case this would perform some operations and takes some time to calculate this value.
+
+```js
+const calculateMostExpensive = (data) => {
+  return (
+    data.reduce((total, item) => {
+      const price = item.fields.price;
+      if (price >= total) {
+        total = price;
+      }
+      return total;
+    }, 0) / 100
+  );
+};
+```
+
+It would be nice to remember the value which gets returned from the above function and only run the function when the data changes (So in my case, of course, that is the products value which is given as a parameter inside the calculateMostExpension)
+
+And to solve the above issue, useMemo can be used. (we need to pass is a callback function and the first thing we need to setup is the function that returns a value which in our case is calculateMostExpension and the second thing is the dependency array.
+And again, in this case, I'm passing in the products.)
+
+```js
+const mostExpensive = useMemo(
+  () => calculateMostExpensive(products),
+  [products]
+);
+```
+
+### Complete code(React.memo, useCallback, useMemo) for Reference
+
+```js
+import React, { useState, useCallback, useMemo } from 'react';
+import { useFetch } from '../../9-custom-hooks/final/2-useFetch';
+
+const url = 'https://course-api.com/javascript-store-products';
+
+// every time props or state changes, component re-renders
+const calculateMostExpensive = (data) => {
+  return (
+    data.reduce((total, item) => {
+      const price = item.fields.price;
+      if (price >= total) {
+        total = price;
+      }
+      return total;
+    }, 0) / 100
+  );
+};
+const Index = () => {
+  const { products } = useFetch(url);
+  const [count, setCount] = useState(0);
+  const [cart, setCart] = useState(0);
+
+  const addToCart = useCallback(() => {
+    setCart(cart + 1);
+  }, [cart]);
+
+  const mostExpensive = useMemo(
+    () => calculateMostExpensive(products),
+    [products]
+  );
+  return (
+    <>
+      <h1>Count : {count}</h1>
+      <button className='btn' onClick={() => setCount(count + 1)}>
+        click me
+      </button>
+      <h1 style={{ marginTop: '3rem' }}>cart : {cart}</h1>
+      <h1>Most Expensive : ${mostExpensive}</h1>
+      <BigList products={products} addToCart={addToCart} />
+    </>
+  );
+};
+
+const BigList = React.memo(({ products, addToCart }) => {
+  return (
+    <section className='products'>
+      {products.map((product) => {
+        return (
+          <SingleProduct
+            key={product.id}
+            {...product}
+            addToCart={addToCart}
+          ></SingleProduct>
+        );
+      })}
+    </section>
+  );
+});
+
+const SingleProduct = ({ fields, addToCart }) => {
+  let { name, price } = fields;
+  price = price / 100;
+  const image = fields.image[0].url;
+
+  return (
+    <article className='product'>
+      <img src={image} alt={name} />
+      <h4>{name}</h4>
+      <p>${price}</p>
+      <button onClick={addToCart}>add to cart</button>
+    </article>
+  );
+};
+export default Index;
+```
+
+### React Router 6 - Updated Version
+
+i) You see, unlike traditional multipage applications, where each time user requests a page, they are stretched from the server and as a result there is a page refresh.
+
+ii) When it comes to react we will build single page applications where all of the HTML JavaScript is loaded at once and the rest of the functionality is handled by JavaScript. And as a result our project gets that snappy app like Feel.
