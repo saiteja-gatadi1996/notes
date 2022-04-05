@@ -1268,3 +1268,93 @@ export default Index;
 i) You see, unlike traditional multipage applications, where each time user requests a page, they are stretched from the server and as a result there is a page refresh.
 
 ii) When it comes to react we will build single page applications where all of the HTML JavaScript is loaded at once and the rest of the functionality is handled by JavaScript. And as a result our project gets that snappy app like Feel.
+
+iii) Now React does not have built in support for routing. In other words, we will need to use an extra library for that. And the most popular choice out there is React Router.
+
+iv) We want to get the browser router which is going to connect to the actual browser,
+
+v) The routes component, which is going to be a parent for all our routes and then route component, which we'll use to set up a single page.
+
+```js
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<div>home page</div>} />
+        <Route
+          path='testing'
+          element={
+            <div>
+              <h2>testing </h2>
+            </div>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+```
+
+vi) Passing compnents in a route
+
+```js
+<BrowserRouter>
+  <Routes>
+    <Route path='/' element={<Home />} />
+    <Route path='about' element={<About />} />
+    <Route path='products' element={<Products />} />
+  </Routes>
+</BrowserRouter>
+```
+
+vi) Linking to the other pages inside our React app, make sure to match up /about from Link to the Route path ='about' (there is no slash here but still it works)
+
+```js
+
+import { Link } from 'react-router-dom';
+
+const Home = () => {
+  return (
+    <div>
+      <h2>Home Page</h2>
+      <Link to='/about' className='btn'>
+        About
+      </Link>
+      <a href="">
+    </div>
+  );
+};
+export default Home;
+```
+
+vii) Error Page (route logic not found)
+
+```js
+<Route path='*' element={<Error />} />
+```
+
+#### viii) Nested pages 
+
+Actually the parent route is nested into the other 3 child routes.
+The behaviour looks something like /about (as only / is given in parent)
+If parent route has dashboard then child routes will be something like this (dashboard/about)
+
+```js
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home />}>
+          <Route path='about' element={<About />} />
+          <Route path='products' element={<Products />} />
+          <Route path='*' element={<Error />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}
+```
