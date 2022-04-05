@@ -1337,11 +1337,14 @@ vii) Error Page (route logic not found)
 <Route path='*' element={<Error />} />
 ```
 
-#### viii) Nested pages 
+#### viii) Nested pages
 
 Actually the parent route is nested into the other 3 child routes.
 The behaviour looks something like /about (as only / is given in parent)
-If parent route has dashboard then child routes will be something like this (dashboard/about)
+
+And this is how we are calling the below based on parent. Ex: /about or /products
+
+In Case if we have dashboard instead of / then it should look like /dashboard/about or /dashboard/products
 
 ```js
 function App() {
@@ -1358,3 +1361,32 @@ function App() {
   );
 }
 ```
+
+### Shared Layout
+
+###### How we can set up a shared layout?
+
+i) Well, we need to go to the parent, in our case Home Component and import Outlet from react-router-dom.
+
+And then we just need to display this Outlet component and whatever we'll set up around this outlet component is going to be the shared layout across the pages that are nested inside of the parent and then the actual page content will be displayed here in the output one.
+
+Ex: If Navbar component is nested inside of the parent then the Navbar will be shared layout
+
+```js
+import { Link } from 'react-router-dom';
+const Navbar = () => {
+  return (
+    <nav className='navbar'>
+      <Link to='/'>Home</Link>
+      <Link to='/about'>About</Link>
+      <Link to='/products'>Products</Link>
+    </nav>
+  );
+};
+export default Navbar;
+```
+![image](https://user-images.githubusercontent.com/42731246/161842297-db023920-ad45-4bc8-810e-f6e5e6ff8fa0.png)
+
+So whatever we have in the about, product. Essentially all the pages that we have nested.
+
+And as a result, notice not only I display the contents of the about page or the product page, but also we have a navbar.
