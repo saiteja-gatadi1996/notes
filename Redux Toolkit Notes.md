@@ -1,6 +1,6 @@
 ### Redux Toolkit
 
-##### 1) What is Redux and why Redux over Context API ?
+##### 1) Why Redux over Context API ?
 i) When it comes to bigger applications, especially if they're built by a team of developers, One of the biggest challenges is state management.
 
 ii) Yes, context API is very useful tool, but it clearly has its limits, especially when we talk about big applications with tons of features and that is why we use the most popular library called Redux.
