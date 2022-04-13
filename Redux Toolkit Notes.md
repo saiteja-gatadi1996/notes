@@ -1,12 +1,12 @@
 ### Redux Toolkit
 
 ##### 1) Why Redux over Context API ?
+
 i) When it comes to bigger applications, especially if they're built by a team of developers, One of the biggest challenges is state management.
 
 ii) Yes, context API is very useful tool, but it clearly has its limits, especially when we talk about big applications with tons of features and that is why we use the most popular library called Redux.
 
 iii) Well Redux is not part of official react even though they are used together.
-
 
 ##### 2) Why Redux ToolKit over Redux ?
 
@@ -20,7 +20,7 @@ i) So creators of Redux notice the general need for opinionated approach while s
 
 ii) Basically, it means that all the popular extra libraries and setups are built in and do not require extra setup. As a result, there is no time consuming set up and over time it speeds up our workflow tremendously.
 
-iii) So with Redux Toolkit, we get all of the benefits. 
+iii) So with Redux Toolkit, we get all of the benefits.
 
 ### Store
 
@@ -258,10 +258,29 @@ export default CartItem;
 
 #### First Reducer
 
+- Previously we needed to set up the action. We need to dispatch and then we always, always needed to return a new state and then just of course, copy the values... That is not the case with Redux toolkit.
+
+- In fact, it's much, much, much easier now with Redux Toolkit. And the way we can do that, we simply go with a reducers property in the slice(cartSlice component) and again, key value pair. Here clearCart is the key (which is actually our reducer).
+
 - cartSlice.js
 - Immer library
 
 ```js
+// OLD CODE
+const ACTION_TYPE = 'ACTION_TYPE';
+
+const actionCreator = (payload) => {
+  return { type: ACTION_TYPE, payload: payload };
+};
+```
+
+- create action
+
+- CartContainer.js
+
+```js
+//This is the NEW CODE that replaced the above OLD CODE
+
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
@@ -275,17 +294,13 @@ const cartSlice = createSlice({
 export const { clearCart } = cartSlice.actions;
 ```
 
-- create action
+- Now, its function gets a state as a parameter . And notice how we don't have to return anything. I don't have to return the new state and always avoid the mutation. Basically, remember, with useReducer, we always, always, always needed to return a new state. We don't have to do that right now.
 
-```js
-const ACTION_TYPE = 'ACTION_TYPE';
+- Why? Because when we installed Redux Toolkit, we also installed Immer Library, which behind the scenes does all the heavy lifting. So in our case, we can modify the state or mutate the state directly (In other words, The reason we can write such mutating code is because Redux Toolkit comes with immer Library)
 
-const actionCreator = (payload) => {
-  return { type: ACTION_TYPE, payload: payload };
-};
-```
+- ##### And then in order to invoke it (actions), we need to get another hook from the React redux and this is useDispatch.
 
-- CartContainer.js
+- So remember with useReducer, we use this useDispatch and we dispatch the action (clearCart).
 
 ```js
 import React from 'react';
@@ -308,4 +323,101 @@ const CartContainer = () => {
 };
 
 export default CartContainer;
+```
+
+- removeItem is another action, and logging the action object actually has this payload property.
+
+![image](https://user-images.githubusercontent.com/42731246/163236270-8599dee9-ffc5-4227-90bc-b90cd26c93e1.png)
+
+#### Reference code below on how to write the actions
+
+```js
+import { createSlice } from '@reduxjs/toolkit';
+
+const initialState = {
+  cartItems: [],
+  amount: 4,
+  total: 0,
+  isLoading: true,
+};
+
+const cartSlice = createSlice({
+  name: 'cart',
+  initialState,
+  reducers: {
+    clearCart: (state) => {
+      state.cartItems = [];
+    },
+    removeItem: (state, action) => {
+      const itemId = action.payload;
+      state.cartItems = state.cartItems.filter((item) => item.id !== itemId);
+    },
+    increase: (state, { payload }) => {
+      const cartItem = state.cartItems.find((item) => item.id === payload.id);
+      cartItem.amount = cartItem.amount + 1;
+    },
+    decrease: (state, { payload }) => {
+      const cartItem = state.cartItems.find((item) => item.id === payload.id);
+      cartItem.amount = cartItem.amount - 1;
+    },
+  },
+});
+
+// console.log(cartSlice);
+export const { clearCart, removeItem, increase, decrease } = cartSlice.actions;
+
+export default cartSlice.reducer;
+```
+
+#### Reference code on how to utilize the actions
+
+```js
+import { ChevronDown, ChevronUp } from '../icons';
+import { removeItem, increase, decrease } from '../features/cart/cartSlice';
+import { useDispatch } from 'react-redux';
+
+const CartItem = ({ id, img, title, price, amount }) => {
+  const dispatch = useDispatch();
+  return (
+    <article className='cart-item'>
+      <img src={img} alt={title} />
+      <div>
+        <h4>{title}</h4>
+        <h4 className='item-price'>${price}</h4>
+        <button
+          className='remove-btn'
+          onClick={() => {
+            dispatch(removeItem(id));
+          }}
+        >
+          remove
+        </button>
+      </div>
+      <div>
+        <button
+          className='amount-btn'
+          onClick={() => {
+            dispatch(increase({ id }));
+          }}
+        >
+          <ChevronUp />
+        </button>
+        <p className='amount'>{amount}</p>
+        <button
+          className='amount-btn'
+          onClick={() => {
+            if (amount === 1) {
+              dispatch(removeItem(id));
+              return;
+            }
+            dispatch(decrease({ id }));
+          }}
+        >
+          <ChevronDown />
+        </button>
+      </div>
+    </article>
+  );
+};
+export default CartItem;
 ```
