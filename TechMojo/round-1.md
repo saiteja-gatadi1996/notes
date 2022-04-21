@@ -6,24 +6,31 @@
 
 ### Problem solving questions
 
-- ##### Write a function to count the occurrence of each character in the input string.
+##### 1) Write a function to count the occurrence of each character in the input string.
 
-  // Input: “abbcccd”
-  // Output: a: 1, b: 2, c: 3, d: 1
+```js
+// Input: “abbcccd”
+// Output: a: 1, b: 2, c: 3, d: 1
+```
 
-  constraints: Use Array.reduce method to get the output
+###### constraints: Use Array.reduce method to get the output
 
-- ##### Write a function for the desired output as:
+---
 
-  // Input: sum(2)(3)()
-  // Output: 5
+##### 2) Write a function for the desired output as:
 
-  // Input: sum(2)(3)(4)()
-  // Output: 9
+```js
+// Input: sum(2)(3)()
+// Output: 5
 
-- ##### Write a program to convert the below given input format into given output format
+// Input: sum(2)(3)(4)()
+// Output: 9
+```
+
+##### 3) Write a program to convert the below given input format into given output format
 
 ##### Input:
+
 ```js
 {
    "user":{
@@ -42,9 +49,11 @@
    }
 
 ```
+
 ##### Expected Output:
+
 ```js
- {
+{
   user_name: 'John';
   user_tech: 'frontend';
   user_address_home_add_1: 'home_dummy_add_1';
