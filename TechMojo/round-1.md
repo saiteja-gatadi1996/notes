@@ -26,6 +26,7 @@
 // Input: sum(2)(3)(4)()
 // Output: 9
 ```
+---
 
 ##### 3) Write a program to convert the below given input format into given output format
 
