@@ -1,9 +1,13 @@
 ## 1.
 
-console.log(0.1+0.2==0.3) //false
+```js
+console.log(0.1 + 0.2 == 0.3) //false
 console.log(0.1 + 0.2) // 0.30000000000000004
+```
 
 ## 2.
+
+```js
 
 ‘use strict’;
 (function(){
@@ -12,45 +16,59 @@ var a = b = 3;
 
 console.log("a defined? " + (typeof a! == 'undefined')); undefined! =='undefined';
 console.log("b defined? " + (typeof b! == 'undefined')); true! =='undefined';
+```
 
 ## 3.
 
-function foo1()
-{
-return {
-bar: "hello"
-};
+```js
+function foo1() {
+  return {
+    bar: 'hello',
+  }
 }
 
-function foo2()
-{
-return
-{
-bar: "hello"
-};
+function foo2() {
+  return
+  {
+    bar: 'hello'
+  }
 }
-O/P: Both doesn’t return same(return keyword in foo2() acts like the end of the statement by assigning ;
+
+// O/P: Both doesn’t return same(return keyword in foo2() acts like the end of the statement by assigning ;
+```
 
 ## 4.
 
-(function() {
-console.log(1);
-setTimeout(function(){console.log(2)}, 1000);
-setTimeout(function(){console.log(3)}, 0);
-console.log(4);
-})();
+```js
+;(function () {
+  console.log(1)
+  setTimeout(function () {
+    console.log(2)
+  }, 1000)
+  setTimeout(function () {
+    console.log(3)
+  }, 0)
+  console.log(4)
+})()
 
-O/p: 1 4 3 2
+// O/p: 1 4 3 2
+```
 
 ## 5. Will this work?
 
-var x=10,y=11,
-z=x+y;
-O/p: Yes, this will work
+```js
+var x = 10,
+  y = 11,
+  z = x + y
+
+// O/p: Yes, this will work
+```
 
 ## 6. find second largest number from Array
 
 ## 7.
+
+```js
 
 let i;
 
@@ -60,25 +78,26 @@ setTimeout(()=>console.log(i), 100);
 }
 
 Ans: 3 3 3
-Reason: in for loop i acts as global scope
+// Reason: in for loop i acts as global scope
+```
 
-## 8. 
+## 8.
 
-function sum(a,b,c){
-
-    return a+b+c;
-
+```js
+function sum(a, b, c) {
+  return a + b + c
 }
 
-function sum(a,b){
-return a+b;
+function sum(a, b) {
+  return a + b
 }
 
-var result=sum(1,2,3)
-console.log(result); //3
+var result = sum(1, 2, 3)
+console.log(result) //3
 Reason: Overriding
+```
 
-## ------------------------------------------------------
+---
 
 ## 1. Prime Number
 
@@ -179,65 +198,80 @@ Cons: Not only /about page will take time to load, but this now affects other pa
 
 ## 19
 
-a=10;
+```js
+a = 10
 
-console.log(a);
+console.log(a)
 
-var a=20;
+var a = 20
+```
 
 O/p:
 ![image](https://user-images.githubusercontent.com/42731246/151492687-63fd27a2-884e-4693-a412-2bda304522b3.png)
 
 ## 20
 
-var obj1={type:"Fiat", model:"500", color:"white"};
-var obj2 = obj1;
-obj2.model= "600";
-console.log(obj1);
-console.log(obj2);
+```js
+var obj1 = { type: 'Fiat', model: '500', color: 'white' }
+var obj2 = obj1
+obj2.model = '600'
+console.log(obj1)
+console.log(obj2)
+```
 
 ![image](https://user-images.githubusercontent.com/42731246/151492604-e45cf218-d91c-4afd-8be2-1cc28b6a249b.png)
 
 ## 21
 
-let a=10;
-let a=20;
+```js
+let a = 10
+let a = 20
+```
 
 ![image](https://user-images.githubusercontent.com/42731246/151492543-669e6cdd-3443-4929-be10-1ce173521f80.png)
 
 ## 22
 
-1 + "12"
+```js
+1 + '12'
+```
+
+```js
+0 - '10'
+```
+
+```js
+'11' + 1
+```
+
+```js
+'10' + -1
+```
+
+```js
+null === undefined
+```
+
+```js
+null == undefined
+```
 
 ## 23
-0 - "10"
 
-## 24
-"11" + 1
+```js
+let a = 10
 
-## 25
-"10" + -1
-
-null === undefined
-
-null == undefined
-
-
-## 26
-
-let a =10;
-
-function func(){
-
-console.log(a)
-
+function func() {
+  console.log(a)
 }
 
-
 func()
+```
 
+## 24
 
-## 27 
+```js
+
 'use strict'
 
 var a= 10
@@ -245,17 +279,23 @@ var a= 10
 console.log(a
 
 var a= 20
+```
 
-## 28 Without use strict
-var a= 10
+## 25 Without use strict
+
+```js
+var a = 10
 
 console.log(a)
 
-var a= 20
+var a = 20
 
 console.log(a)
+```
 
-## 29
+## 26
+
+```js
 
 function func(a){
 let fname = "Singh";
@@ -263,8 +303,6 @@ a()
 }
 
 func a (fname){
-
-
 
 });
 
@@ -277,33 +315,39 @@ a(fname) //pass
 func a (fname){
 console.log(fname)
 
-
 });
+```
 
+## 27
 
-## 30
+```js
+let array = [1, 1, 3, 6, 5, 6]
+let result = [...new Set(array)]
+console.log(result)
+```
 
-let array = [1,1,3,6,5,6];
-let result = [...new Set(array)];
-console.log(result);
+## 28
 
-
-## 31
-
-const a = "12";
+```js
+const a = '12'
 a = 11
-console.log(a);
+console.log(a)
+```
 
-## 32
+## 29
 
+```js
 const Employee = {
-firstname: 'John',
-lastname: 'Doe'
-};
-Employee.firstname = "Singh";
-console.log(Employee.firstname);
+  firstname: 'John',
+  lastname: 'Doe',
+}
+Employee.firstname = 'Singh'
+console.log(Employee.firstname)
+```
 
-## 33 CSS related
+## 30 CSS related
+
+```js
 
 div, p
 
@@ -312,72 +356,82 @@ div+p
 div p
 
 div > p
+```
 
+## 31 sum of the even numbers (which has to be squared)
 
-## 34 sum of the even numbers (which has to be squared)
-
+```js
 const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const evenNumbers = array
-  .filter((item) => item % 2 == 0)
-  .map((item) => item * item)
-  .reduce((item1, item2) => item1 + item2);
+.filter((item) => item % 2 == 0)
+.map((item) => item \* item)
+.reduce((item1, item2) => item1 + item2);
 
 console.log(evenNumbers);
+```
 
+## 32 What will this print ?
 
-## 35 What will this print ?
-const filteredItems = array.filter(() => 0);
-console.log(filteredItems);
+```js
+const filteredItems = array.filter(() => 0)
+console.log(filteredItems)
+```
 
+## 33 Print the value based on the query params and second key value pair (&)
 
-## 36 Print the value based on the query params and second key value pair (&)
-
+```js
 const url =
-  "https://codesandbox.io/s/little-darkness-qsymi?file=/src/index.js:205-267&name=saiteja";
+  'https://codesandbox.io/s/little-darkness-qsymi?file=/src/index.js:205-267&name=saiteja'
+```
 
-console.log(url.split("=") )
+## 34
 
+```js
+var objA = { prop1: 42 }
+var objB = objA
+objB.prop1 = 90
+console.log(objA)
+```
+
+## 35
+
+```js
+(function () {
+  var objA = new Object({ foo: 'foo' })
+  var objB = new Object({ foo: 'foo' })
+  console.log(objA == objB)
+  console.log(objA === objB)
+})()
+```
+
+## 36
+
+```js
+for (var i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 1)
+}
+```
 
 ## 37
 
-var objA = {prop1: 42};
-var objB = objA;
-objB.prop1 = 90;
-console.log(objA)
-
+```js
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 1)
+}
+```
 
 ## 38
-(function() {
-var objA = new Object({foo: "foo"});
-var objB = new Object({foo: "foo"});
-console.log(objA == objB);
-console.log(objA === objB);
-}());
 
+```js
+var x = { name: 10 }
+var y = { ...x }
+y.name = 20
 
-## 39
-for (var i = 0; i < 3; i++) {
-setTimeout(() => console.log(i), 1);
-}
+console.log(x)
+console.log(y)
+```
 
-
-## 40
-for (let i = 0; i < 3; i++) {
-setTimeout(() => console.log(i), 1);
-}
-
-
-## 41
-var x = {name:10};
-var y = {...x};
-y.name=20
-
-
-console.log(x);
-console.log(y);
-
-
-## 42 Exercise with React.js 
+## 39 Exercise with React.js
 
 Create a search bar which:
 1.Fetches data from an API : https://dummy.restapiexample.com/api/v1/employees
@@ -388,139 +442,149 @@ Create a search bar which:
 
 4. A cross mark to clear the search bar.
 
+## 40
 
+```js
+var a = 2
+a++
+console.log(a) // 3
+const d = [1, 2, 3]
+d.push(5)
+console.log(d) // [1,2,3,5]
+const b = 2
+b++
+console.log(b) // TypeError: Assignment to constant variable
+const c = [2] //nothing prints from this line
+c[0]++
+console.log(c)
+```
 
-## 43
-var a = 2;
-a++;
-console.log(a); // 3
-const d = [1, 2, 3];
-d.push(5);
-console.log(d); // [1,2,3,5]
-const b = 2;
-b++;
-console.log(b); // TypeError: Assignment to constant variable
-const c = [2]; //nothing prints from this line
-c[0]++;
-console.log(c);
+## 41
 
-
-
-## 44
-
-var a = b();
-console.log(a);
-var c = d();
-function b(){
-return c;
+```js
+var a = b()
+console.log(a)
+var c = d()
+function b() {
+  return c
 }
-console.log(a);
-var d = function(){
-return b();
+console.log(a)
+var d = function () {
+  return b()
 }
-console.log
+```
 
+## 42
 
-## 45
+```js
 
 function a(){
 for(var i =0; i<10; i++){
 setTimeout(() => {
 console.log(i)
-}, i*1000)
+}, i\*1000)
 }
 }
 a();
+```
 
+## 43 Design this in less than 30 minutes
 
-## Design this in less than 30 minutes
 ![image](https://user-images.githubusercontent.com/42731246/152519562-3d8001fd-f083-4e54-976c-8617519eeec4.png)
 
-##
+## 44
+
+```js
+
 var myObject = {
-    foo: "bar",
-    func: function() {
-        var self = this;
-        console.log("outer func:  this.foo = " + this.foo);
-        console.log("outer func:  self.foo = " + self.foo);
-        (function() {
-            console.log("inner func:  this.foo = " + this.foo);
-            console.log("inner func:  self.foo = " + self.foo);
-        }());
-    }
+foo: "bar",
+func: function() {
+var self = this;
+console.log("outer func: this.foo = " + this.foo);
+console.log("outer func: self.foo = " + self.foo);
+(function() {
+console.log("inner func: this.foo = " + this.foo);
+console.log("inner func: self.foo = " + self.foo);
+}());
+}
 };
 myObject.func();
 
-outer func:  this.foo = bar
-outer func:  self.foo = bar
-inner func:  this.foo = undefined
-inner func:  self.foo = bar
+outer func: this.foo = bar
+outer func: self.foo = bar
+inner func: this.foo = undefined
+inner func: self.foo = bar
+```
 
-##
+## 45
+
+```js
 function foo1()
 {
-  return {
-      bar: "hello"
-  };
+return {
+bar: "hello"
+};
 }
 
 function foo2()
 {
-  return
-  {
-      bar: "hello"
-  };
+return
+{
+bar: "hello"
+};
 }
 
-## Output:
+// ## Output:
+
 foo1 returns:
 Object {bar: "hello"}
 foo2 returns:
-undefined 
+undefined
+```
 
+## 46
 
-## Output of the question
+```js
+var output = (function (x) {
+  delete x
 
-var output = (function(x) {  
+  return x
+})(0)
 
-delete x;  
+console.log(output)
+```
 
-return x;  
+## 47 How to empty an array
 
-})(0);  
-
-console.log(output); 
-
-
-## How to empty an array
+```js
 let a = [1, 6, 8, 9]
+```
 
 I only know this :D
 ![image](https://user-images.githubusercontent.com/42731246/157432109-40d06b7e-6ff2-45ad-8183-6099bb881dc9.png)
 
+## 48 only print defined values
 
-## only print defined values
-let b = [1, 2, , 4, 5] 
+```js
+let b = [1, 2, , 4, 5]
 
-output should be [1, 2, 4, 5]
+// output should be [1, 2, 4, 5]
+```
 
 ![image](https://user-images.githubusercontent.com/42731246/157432025-07b3d0e6-7098-415e-9178-cf344035e8ec.png)
 
+## 49 Remove duplicates
 
-
-## Remove duplicates
-let c = [1, 2, 3, 2, 5, 3] 
+let c = [1, 2, 3, 2, 5, 3]
 
 ![image](https://user-images.githubusercontent.com/42731246/157431756-89909225-d3d0-4efa-b5a8-e55e9de24e57.png)
 
+## 50 Nested Arrays
 
-## Nested Arrays
-let a = [1, 2, [3, 4, [5, 6, [7, 8, [9, 10]]]]]; 
+```js
+let a = [1, 2, [3, 4, [5, 6, [7, 8, [9, 10]]]]]
 
-output should be [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// output: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+```
 
 ![image](https://user-images.githubusercontent.com/42731246/157431479-ca9028f4-596b-4541-9b53-e2cf67892cd6.png)
-
-
-
-
