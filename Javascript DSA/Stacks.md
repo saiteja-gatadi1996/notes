@@ -59,9 +59,9 @@ The Stack function would contain 2 parts:
 ```js
 // The block of code below defines how elements can be pushed or added to the stack.
 
-Stack.prototype.push=function(data)=>{
-    this._top++
-    this._values[this._top]=data
+Stack.prototype.push = function (data) {
+  this._top++
+  this._values[this._top] = data
 }
 
 //We just increment the top to get the index for new element and then insert the data. Top is automatically pointing to the top-most element in the stack.
@@ -80,16 +80,16 @@ Stack.prototype.push=function(data)=>{
 - As the last step, we return the element that was at the top.
 
 ```js
-Stack.prototype.pop=function()=>{
-    if(this._top < 0){
-        return null
-    }
+Stack.prototype.pop = function () {
+  if (this._top < 0) {
+    return null
+  }
 
-    var topElement = this._values[this._top]
-    this._top--
-    this._values.length--
+  var topElement = this._values[this._top]
+  this._top--
+  this._values.length--
 
-    return topElement
+  return topElement
 }
 ```
 
@@ -98,11 +98,11 @@ Stack.prototype.pop=function()=>{
 ### Peeking at the top element
 
 ```js
-Stack.prototype.peek= function ()=>{
-    if(this._top < 0){
-        return null
-    }
- return this._values[this._top]
+Stack.prototype.peek = function () {
+  if (this._top < 0) {
+    return null
+  }
+  return this._values[this._top]
 }
 ```
 
