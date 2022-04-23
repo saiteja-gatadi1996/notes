@@ -135,7 +135,7 @@ Queue.prototype.dequeue = function () {
 
 ### Does Javascript has built-in support for Queues
 
-#####It does. Just like stacks, queues can be implemented using Javascript's array. Here's how.
+##### It does. Just like stacks, queues can be implemented using Javascript's array. Here's how.
 
 - Enqueue can be implemented by using Array.push.
 
